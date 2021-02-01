@@ -4,5 +4,7 @@ public class Main {
         System.out.println("Test for committing an update");
         System.out.println("Test for Sarah");
         System.out.println("xcxc  cxv vxcxcxc");
+        System.out.println("TEST");
+
     }
 }
