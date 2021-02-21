@@ -3,19 +3,15 @@ public class LineStatement {
     private Instruction instruction;
     private String Comments;
 
-    public LineStatement(String label,Instruction instruction, String comments) {
+    public LineStatement(String label,String mne,String operand, String comments) {
         this.label = label;
-        this.instruction= new Instruction(instruction.getMnemonic(), instruction.getOperand());
+        this.instruction= new Instruction(mne, operand);
         Comments = comments;
     }
-//
-//    public String getMne() {
-//        return mne;
-//    }
-//
-//    public String getOperand() {
-//        return operand;
-//    }
+
+    public Instruction getInstruction() {
+        return instruction;
+    }
 
     public String getComments() {
         return Comments;
