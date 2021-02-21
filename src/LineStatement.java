@@ -1,23 +1,21 @@
 public class LineStatement {
     private String label;
-    private String mne;
-    private String operand;
+    private Instruction instruction;
     private String Comments;
 
-    public LineStatement(String label, String mne, String operand, String comments) {
+    public LineStatement(String label,Instruction instruction, String comments) {
         this.label = label;
-        this.mne = mne;
-        this.operand = operand;
+        this.instruction= new Instruction(instruction.getMnemonic(), instruction.getOperand());
         Comments = comments;
     }
-
-    public String getMne() {
-        return mne;
-    }
-
-    public String getOperand() {
-        return operand;
-    }
+//
+//    public String getMne() {
+//        return mne;
+//    }
+//
+//    public String getOperand() {
+//        return operand;
+//    }
 
     public String getComments() {
         return Comments;
