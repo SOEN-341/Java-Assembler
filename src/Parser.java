@@ -1,4 +1,4 @@
-public class SyntaxAnalyser {
+public class Parser {
     private String Labels;
     private int Offsets;
     private String Mnemonic;
