@@ -6,7 +6,7 @@ public class Scanner {
 
     public static ArrayList<Token> scanToken(File f) throws IOException {
 
-        ArrayList<Token> token = new ArrayList<>();
+        ArrayList<Token> token = new ArrayList<Token>();
 
         FileReader fr = new FileReader(f);
         BufferedReader br = new BufferedReader(fr);
