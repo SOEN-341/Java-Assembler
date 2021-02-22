@@ -40,6 +40,7 @@ public class SymbolTable implements ISymbolTable{
         return (int)Table.get(mnemonic);
     }
 
+
 }
 
 
