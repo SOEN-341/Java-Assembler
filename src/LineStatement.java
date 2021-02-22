@@ -1,4 +1,4 @@
-public class LineStatement {
+public class LineStatement implements ILineStatement {
     private String label;
     private Instruction instruction;
     private String Comments;
