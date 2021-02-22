@@ -15,7 +15,7 @@ public class Scanner {
 
         try {
             token = new ArrayList<Token>();
-            f = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\TestInherentMnemonics.asm");
+            f = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\copiedTestInherentMnemonics.asm");
             copy = Reader.readFile(f);
             fr = new FileReader(f);
             br = new BufferedReader(fr);
