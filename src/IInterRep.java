@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public interface IIntermediateRepresentation {
+public interface IInterRep {
 
     ArrayList<LineStatement> generates();
 }
