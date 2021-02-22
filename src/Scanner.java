@@ -4,8 +4,8 @@ import java.util.ArrayList;
 public class Scanner {
 
 
-    public static ArrayList<Token> scanToken(File f) throws IOException {
-
+    public static ArrayList<Token> scanToken() throws IOException {
+        File f = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\copiedTestInherentMnemonics.asm");
         ArrayList<Token> token = new ArrayList<Token>();
 
         FileReader fr = new FileReader(f);

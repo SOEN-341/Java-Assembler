@@ -19,11 +19,6 @@ public class Reader {
         }
         pw.close();
 
-
-
-        Scanner.scanToken(out);
-
-
     }
 
     }
