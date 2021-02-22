@@ -1,4 +1,4 @@
-public class Instruction {
+public class Instruction implements IInstruction{
     private String Mnemonic;
     private String Operand;
 
