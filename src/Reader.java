@@ -2,24 +2,36 @@ import java.io.*;
 
 public class Reader {
 
-    public static void main(String [] args) throws IOException {
+    public static File readFile(File f) throws IOException {
+        FileReader fr = null;
+        BufferedReader bf = null;
+        String line = null;
+        File out = null;
+        FileWriter fw = null;
+        PrintWriter pw = null;
 
+        try {
+            fr = new FileReader(f);
+             bf = new BufferedReader(fr);
 
+             out = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\copiedTestInherentMnemonics.asm");
+             fw = new FileWriter(out);
+             pw = new PrintWriter(fw);
 
-        File f = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\TestInherentMnemonics.asm");
-        FileReader fr = new FileReader(f);
-        BufferedReader bf = new BufferedReader(fr);
-        String line;
-        File out = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\copiedTestInherentMnemonics.asm");
-        FileWriter fw = new FileWriter(out);
-        PrintWriter pw = new PrintWriter(fw);
-
-        while ((line = bf.readLine()) != null) {
-            pw.println(line);
+            while ((line = bf.readLine()) != null) {
+                pw.println(line);
+            }
+            pw.close();
+            return out;
         }
-        pw.close();
 
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+     return out;
     }
 
-    }
+
+
+}
 
