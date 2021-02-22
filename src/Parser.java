@@ -1,8 +1,17 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class Parser {
+// receives Arraylist<Token>
 
+public class Parser {
+    IntermediateRepresentation IR;
+    public Parser(){
+        this.IR = new IntermediateRepresentation();
+    }
+
+    public IntermediateRepresentation generateIR(){
+        return null;
+    }
 
 
 

@@ -29,11 +29,6 @@ public class SymbolTable implements ISymbolTable{
         Table.put("tle", 0x1E);
         Table.put("tge", 0x1F);
 
-
-
-
-
-
     }
 
     public int getOpcode(String mnemonic){
