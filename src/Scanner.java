@@ -5,26 +5,43 @@ public class Scanner {
 
 
     public static ArrayList<Token> scanToken() throws IOException {
-        File f = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\copiedTestInherentMnemonics.asm");
-        ArrayList<Token> token = new ArrayList<Token>();
 
-        FileReader fr = new FileReader(f);
-        BufferedReader br = new BufferedReader(fr);
-        String s= br.readLine();
-        int i =0;
-       while (s != null) {
+        File f = null;
+        File copy = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        String s = null;
+        ArrayList<Token> token = null;
 
-          if (s.charAt(0) == ' ') {
-              Token t = new Token(new Position(i, 0), s, TokenType.Mnemonic);
-              token.add(t);
-              i++;
+        try {
+            token = new ArrayList<Token>();
+            f = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\TestInherentMnemonics.asm");
+            copy = Reader.readFile(f);
+            fr = new FileReader(f);
+            br = new BufferedReader(fr);
+            s= br.readLine();
+            int i =0;
 
-          }
-          s = br.readLine();
+            while (s != null) {
 
-          }
-       System.out.println(token);
-          return token;
+                if (s.charAt(0) == ' ') {
+                    ++i;
+                    Token t = new Token(new Position(i, 0), s, TokenType.Mnemonic);
+                    token.add(t);
+
+
+                }
+                s = br.readLine();
+
+            }
+            System.out.println(token);
+            return token;
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+      return token;
     }
+
 
 }
