@@ -1,18 +1,20 @@
-import java.io.*;
 import java.util.ArrayList;
 
 // receives Arraylist<Token>
 
-public class Parser {
-    IntermediateRepresentation IR;
-    public Parser(){
-        this.IR = new IntermediateRepresentation();
-    }
+public class Parser implements IParser {
 
-    public IntermediateRepresentation generateIR(){
+    @Override
+    public ArrayList<Token> getLabel() {
         return null;
     }
 
-
-
+    @Override
+    public ArrayList<Token> getMnemonic() {
+        return null;
+    }
+    @Override
+    public ArrayList<Token> getComments() {
+        return null;
+    }
 }
