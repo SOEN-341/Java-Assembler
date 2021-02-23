@@ -1,40 +1,52 @@
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Scanner {
 
 
-    public static ArrayList<Token> scanToken() throws IOException {
+    public static ArrayList<Token> scanToken()  {
 
         File f = null;
         File copy = null;
-        FileReader fr = null;
-        BufferedReader br = null;
-        String s = null;
+        FileInputStream input = null;
+        int c = 0;
+        int i=1;
         ArrayList<Token> token = null;
+        String str = "";
 
         try {
             token = new ArrayList<Token>();
-            f = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\copiedTestInherentMnemonics.asm");
+            f = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\TestInherentMnemonics.asm");
             copy = Reader.readFile(f);
-            fr = new FileReader(f);
-            br = new BufferedReader(fr);
-            s= br.readLine();
-            int i =0;
+           input = new FileInputStream(copy);
+            String [] array = new String[27];
+            while (c != -1)
+            {
 
-            while (s != null) {
+                c= input.read();
+              if (c == 32) {
 
-                if (s.charAt(0) == ' ') {
-                    ++i;
-                    Token t = new Token(new Position(i, 0), s, TokenType.Mnemonic);
-                    token.add(t);
+                  while (c != 10) {
+                      c = input.read();
+                      if (c != 10) {
+                          array[i] += (char)c;
 
+                      }
 
-                }
-                s = br.readLine();
+                  }
+                  i++;
+               }
+
+             /*   Token t = new Token(new Position(i,1), name, TokenType.Mnemonic);
+                token.add(t);
+                i++; */
 
             }
-            System.out.println(token);
+            System.out.println(array[0]);
+
+         //   System.out.println(token);
+            input.close();
             return token;
         }
         catch(IOException e) {
@@ -42,6 +54,9 @@ public class Scanner {
         }
       return token;
     }
+public static void main(String[] args) {
 
+    scanToken();
+}
 
 }

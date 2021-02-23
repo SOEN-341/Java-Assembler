@@ -3,7 +3,9 @@ public class SymbolTable implements ISymbolTable{
     private Hashtable Table;
     // This is going to be the hardcode for the 25 mne
     public SymbolTable(){
+
         this.Table = new Hashtable();
+
         Table.put("hlt", new Mnemonic("hlt", 0x00)); ;
         Table.put("pop", new Mnemonic("pop", 0x01));
         Table.put("exit", new Mnemonic("exit", 0x03));
@@ -32,6 +34,7 @@ public class SymbolTable implements ISymbolTable{
     }
 
     public int getOpcode(String mnemonic){
+
         return (int)Table.get(mnemonic);
     }
 
