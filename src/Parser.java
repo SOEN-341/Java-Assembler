@@ -4,7 +4,7 @@ import java.util.ArrayList;
 // receives Arraylist<Token>
 
 public class Parser implements IParser{
-    private ArrayList<String> Mnemonic= new ArrayList<String>(10);
+    private ArrayList<String> Mnemonic= new ArrayList<String>();
     private static int Count_Mnemonic=1;
 
     Parser(){
