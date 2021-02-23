@@ -14,7 +14,7 @@ public class Reader {
             fr = new FileReader(f);
              bf = new BufferedReader(fr);
 
-             out = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\copiedTestInherentMnemonics.asm");
+             out = new File("copiedTestInherentMnemonics.asm");
              fw = new FileWriter(out);
              pw = new PrintWriter(fw);
 

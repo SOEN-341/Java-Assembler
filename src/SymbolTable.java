@@ -32,7 +32,7 @@ public class SymbolTable implements ISymbolTable{
     }
 
     public int getOpcode(String mnemonic){
-        return (int)Table.get(mnemonic);
+        return ((Mnemonic)Table.get(mnemonic)).getOpcode();
     }
 
 
