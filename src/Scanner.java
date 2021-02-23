@@ -14,7 +14,7 @@ public class Scanner {
         int i=0;
         ArrayList<Token> token = null;
         String str = "";
-        String [] array = new String[26];
+        String [] mnemoic = new String[26];
         try {
             token = new ArrayList<Token>();
             f = new File("TestInherentMnemonics.asm");
@@ -25,20 +25,21 @@ public class Scanner {
             {
                 String name = "";
                 c= input.read();
-                if (c == 32) {
 
+                if (c == 32) { // space  --> Mnemonic
                     while (c != 10) {
                         c = input.read();
                         if (c != 10 && c != 32) {
                             name += (char)c;
                         }
                     }
-                    array[i] = name;
+                    mnemoic[i] = name;
                     i++;
                 }
+
             }
-            for (int k =0; k < array.length;k++) {
-                Token t = new Token(new Position(k+1, 1), array[k], TokenType.Mnemonic);
+            for (int k =0; k < mnemoic.length;k++) {
+                Token t = new Token(new Position(k+1, 1), mnemoic[k], TokenType.Mnemonic);
                 token.add(t);
             }
             System.out.println(token);
