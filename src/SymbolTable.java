@@ -1,11 +1,12 @@
 import java.util.Hashtable;
 public class SymbolTable implements ISymbolTable{
-    private Hashtable Table;
+    private Hashtable<String, Mnemonic> Table;
     // This is going to be the hardcode for the 25 mne
     public SymbolTable(){
-        this.Table = new Hashtable();
-        Table.put("hlt", new Mnemonic("hlt", 0x00)); ;
+        this.Table = new Hashtable<String, Mnemonic>();
+        Table.put("halt", new Mnemonic("halt", 0x00));
         Table.put("pop", new Mnemonic("pop", 0x01));
+        Table.put("dup", new Mnemonic("dup", 0x02));
         Table.put("exit", new Mnemonic("exit", 0x03));
         Table.put("ret", new Mnemonic("ret", 0x04));
         Table.put("not", new Mnemonic("not", 0x0C));
@@ -32,7 +33,7 @@ public class SymbolTable implements ISymbolTable{
     }
 
     public int getOpcode(String mnemonic){
-        return ((Mnemonic)Table.get(mnemonic)).getOpcode();
+        return (Table.get(mnemonic)).getOpcode();
     }
 
 

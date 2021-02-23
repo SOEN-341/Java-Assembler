@@ -16,5 +16,11 @@ public class InterRep implements IInterRep {
         this.IR.add(ls);
     }
 
+    @Override
+    public String toString() {
+        return "InterRep{" +
+                "IR=" + IR +
+                '}';
+    }
 }
 

@@ -1,4 +1,5 @@
+import java.io.File;
 public interface ICodeGenerator {
-    public void generateListing(InterRep IR, SymbolTable Table);
+    public static void generateListing(InterRep IR, SymbolTable Table, File f){};
     public void generateExecutable();
 }

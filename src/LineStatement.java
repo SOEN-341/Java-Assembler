@@ -20,4 +20,13 @@ public class LineStatement implements ILineStatement {
     public String getLabel() {
         return label;
     }
+
+    @Override
+    public String toString() {
+        return "LineStatement{" +
+                "label='" + label + '\'' +
+                ", instruction=" + instruction +
+                ", Comments='" + Comments + '\'' +
+                '}';
+    }
 }

@@ -14,7 +14,7 @@ public class Reader {
             fr = new FileReader(f);
              bf = new BufferedReader(fr);
 
-             out = new File("copiedTestInherentMnemonics.asm");
+             out = new File("copied" + f.getName());
              fw = new FileWriter(out);
              pw = new PrintWriter(fw);
 

@@ -14,4 +14,12 @@ public class Instruction implements IInstruction{
     public String getOperand(){
         return Operand;
     }
+
+    @Override
+    public String toString() {
+        return "Instruction{" +
+                "Mnemonic='" + Mnemonic + '\'' +
+                ", Operand='" + Operand + '\'' +
+                '}';
+    }
 }
