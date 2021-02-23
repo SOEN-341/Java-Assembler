@@ -52,7 +52,7 @@ public class Scanner {
         return token;
     }
     public static void main(String[] args) {
-
+        // test for sevag
         scanToken();
     }
 
