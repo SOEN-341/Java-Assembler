@@ -1,5 +1,4 @@
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Scanner {
@@ -52,7 +51,6 @@ public class Scanner {
         return token;
     }
     public static void main(String[] args) {
-        // test for sevag
         scanToken();
     }
 
