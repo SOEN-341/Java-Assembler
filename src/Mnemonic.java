@@ -1,8 +1,8 @@
 public class Mnemonic {
     String name;
-    String Opcode;
+    int Opcode;
 
-    public Mnemonic(String name, String opcode) {
+    public Mnemonic(String name, int opcode) {
         this.name = name;
         Opcode = opcode;
     }
@@ -15,11 +15,11 @@ public class Mnemonic {
         this.name = name;
     }
 
-    public String getOpcode() {
+    public int getOpcode() {
         return Opcode;
     }
 
-    public void setOpcode(String opcode) {
+    public void setOpcode(int opcode) {
         Opcode = opcode;
     }
 

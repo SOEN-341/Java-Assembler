@@ -4,15 +4,15 @@ public class SymbolTable implements ISymbolTable{
     // This is going to be the hardcode for the 25 mne
     public SymbolTable(){
         this.Table = new Hashtable();
-        Table.put("hlt", 0x00);
-        Table.put("pop", 0x01);
-        Table.put("exit", 0x03);
-        Table.put("ret", 0x04);
-        Table.put("not", 0x0C);
-        Table.put("and", 0x0D);
-        Table.put("or", 0x0E);
-        Table.put("xor", 0x0F);
-        Table.put("neg", 0x10);
+        Table.put("hlt", new Mnemonic("hlt", 0x00)); ;
+        Table.put("pop", 0x01); new Mnemonic("hlt", 0x00);
+        Table.put("exit", 0x03); new Mnemonic("hlt", 0x00);
+        Table.put("ret", 0x04); new Mnemonic("hlt", 0x00);
+        Table.put("not", 0x0C); new Mnemonic("hlt", 0x00);
+        Table.put("and", 0x0D); new Mnemonic("hlt", 0x00);
+        Table.put("or", 0x0E); new Mnemonic("hlt", 0x00);
+        Table.put("xor", 0x0F);new Mnemonic("hlt", 0x00);
+        Table.put("neg", 0x10);new Mnemonic("hlt", 0x00);
         Table.put("inc", 0x11);
         Table.put("dec", 0x12);
         Table.put("add", 0x13);
