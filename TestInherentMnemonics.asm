@@ -16,11 +16,11 @@
  div 
  rem 
  shl 
- shr 
+ shr
  teq 
  tne 
  tlt 
  tgt 
  tle 
  tge 
- halt       
+ halt

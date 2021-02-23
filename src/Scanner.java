@@ -11,37 +11,37 @@ public class Scanner {
         File copy = null;
         FileInputStream input = null;
         int c = 0;
-        int i=1;
+        int i=0;
         ArrayList<Token> token = null;
         String str = "";
-
+        String [] array = new String[26];
         try {
             token = new ArrayList<Token>();
-            f = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\TestInherentMnemonics.asm");
-            copy = Reader.readFile(f);
-            input = new FileInputStream(copy);
-            String [] array = new String[27];
+            f = new File("TestInherentMnemonics.asm");
+            copy = Reader.readFile(f); // filed copy here
+            input = new FileInputStream(copy); // opening the new stream on copied file.
+
             while (c != -1)
             {
+                String name = "";
                 c= input.read();
                 if (c == 32) {
 
                     while (c != 10) {
                         c = input.read();
-                        if (c != 10) {
-                            array[i] += (char)c;
+                        if (c != 10 && c != 32) {
+                            name += (char)c;
                         }
                     }
+                    array[i] = name;
                     i++;
                 }
-             /*   Token t = new Token(new Position(i,1), name, TokenType.Mnemonic);
-                token.add(t);
-                i++; */
-
             }
-            System.out.println(array[0]);
-
-            //   System.out.println(token);
+            for (int k =0; k < array.length;k++) {
+                Token t = new Token(new Position(k+1, 1), array[k], TokenType.Mnemonic);
+                token.add(t);
+            }
+            System.out.println(token);
             input.close();
             return token;
         }
