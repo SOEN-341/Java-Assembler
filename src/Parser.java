@@ -19,7 +19,6 @@ public class Parser implements IParser{
             int columnNumber = Scanner.scanToken().get(i).getPosition().getColumnNumber();
             if (LineNumber == Count_Mnemonic && columnNumber == 0 ){
                 String MmeName = Scanner.scanToken().get(i).getName();
-                System.out.println(MmeName);
                 Mnemonic.add(MmeName);
                 Count_Mnemonic++;
                 continue;
@@ -36,7 +35,7 @@ public class Parser implements IParser{
     public InterRep generates () throws IOException {
         InterRep IR = new InterRep();
         for ( int i=0; i<getMnemonic().size(); i++){
-            LineStatement Line = new LineStatement("", getMnemonic().get(i),"","" );
+            LineStatement Line = new LineStatement("", getMnemonic().get(i).trim(),"","" );
             IR.add(Line);
         }
         return  IR;

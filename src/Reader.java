@@ -2,24 +2,26 @@ import java.io.*;
 
 public class Reader {
 
-    public static File readFile(File f)  {
-
+    public static File readFile(File f) throws IOException {
+        FileReader fr = null;
+        BufferedReader bf = null;
+        String line = null;
         File out = null;
-        int i=0;
-        FileInputStream input = null;
-        FileOutputStream output = null;
+        FileWriter fw = null;
+        PrintWriter pw = null;
 
         try {
-            out = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\copiedTestInherentMnemonics.asm");
-            input = new FileInputStream(f);
-            output = new FileOutputStream(out);
+            fr = new FileReader(f);
+             bf = new BufferedReader(fr);
 
-            while ((i = input.read()) != -1) {
-                output.write(i);
+             out = new File("copied" + f.getName());
+             fw = new FileWriter(out);
+             pw = new PrintWriter(fw);
+
+            while ((line = bf.readLine()) != null) {
+                pw.println(line);
             }
-
-            input.close();
-            output.close();
+            pw.close();
             return out;
         }
 
@@ -29,10 +31,7 @@ public class Reader {
      return out;
     }
 
-public static void main(String [] args) {
-        File f = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\TestInherentMnemonics.asm");
-        readFile(f);
-}
+
 
 }
 

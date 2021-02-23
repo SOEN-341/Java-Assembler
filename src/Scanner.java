@@ -19,25 +19,21 @@ public class Scanner {
             token = new ArrayList<Token>();
             f = new File("D:\\Projects\\Intellij Projects\\Java-Assembler\\TestInherentMnemonics.asm");
             copy = Reader.readFile(f);
-           input = new FileInputStream(copy);
+            input = new FileInputStream(copy);
             String [] array = new String[27];
             while (c != -1)
             {
-
                 c= input.read();
-              if (c == 32) {
+                if (c == 32) {
 
-                  while (c != 10) {
-                      c = input.read();
-                      if (c != 10) {
-                          array[i] += (char)c;
-
-                      }
-
-                  }
-                  i++;
-               }
-
+                    while (c != 10) {
+                        c = input.read();
+                        if (c != 10) {
+                            array[i] += (char)c;
+                        }
+                    }
+                    i++;
+                }
              /*   Token t = new Token(new Position(i,1), name, TokenType.Mnemonic);
                 token.add(t);
                 i++; */
@@ -45,18 +41,18 @@ public class Scanner {
             }
             System.out.println(array[0]);
 
-         //   System.out.println(token);
+            //   System.out.println(token);
             input.close();
             return token;
         }
         catch(IOException e) {
             e.printStackTrace();
         }
-      return token;
+        return token;
     }
-public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    scanToken();
-}
+        scanToken();
+    }
 
 }
