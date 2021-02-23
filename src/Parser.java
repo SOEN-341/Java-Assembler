@@ -17,7 +17,7 @@ public class Parser implements IParser{
             int LineNumber = Scanner.scanToken().get(i).getPosition().getLineNumber();
 
             int columnNumber = Scanner.scanToken().get(i).getPosition().getColumnNumber();
-            if (LineNumber == Count_Mnemonic && columnNumber == 0 ){
+            if (LineNumber == Count_Mnemonic && columnNumber == 1 ){
                 String MmeName = Scanner.scanToken().get(i).getName();
                 Mnemonic.add(MmeName);
                 Count_Mnemonic++;
