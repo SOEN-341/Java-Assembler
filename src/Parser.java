@@ -11,14 +11,15 @@ public class Parser implements IParser{
         Mnemonic=new ArrayList<String>();
     }
 
-    public ArrayList<String> getMnemonic() throws IOException {
-        int size = Scanner.scanToken().size();
+    public ArrayList<String> getMnemonic() {
+        ArrayList<Token> Tokens= Scanner.scanToken();
+        int size = Tokens.size();
         for (int i=0; i<size; i++){
-            int LineNumber = Scanner.scanToken().get(i).getPosition().getLineNumber();
+            int LineNumber = Tokens.get(i).getPosition().getLineNumber();
 
-            int columnNumber = Scanner.scanToken().get(i).getPosition().getColumnNumber();
+            int columnNumber =Tokens.get(i).getPosition().getColumnNumber();
             if (LineNumber == Count_Mnemonic && columnNumber == 1 ){
-                String MmeName = Scanner.scanToken().get(i).getName();
+                String MmeName = Tokens.get(i).getName();
                 Mnemonic.add(MmeName);
                 Count_Mnemonic++;
                 continue;
@@ -32,10 +33,11 @@ public class Parser implements IParser{
         return Mnemonic;
     }
 
-    public InterRep generates () throws IOException {
+    public InterRep generates ()  {
         InterRep IR = new InterRep();
-        for ( int i=0; i<getMnemonic().size(); i++){
-            LineStatement Line = new LineStatement("", getMnemonic().get(i).trim(),"","" );
+        ArrayList<String> Mme=getMnemonic();
+        for ( int i=0; i<Mme.size(); i++){
+            LineStatement Line = new LineStatement("", Mme.get(i).trim(),"","" );
             IR.add(Line);
         }
         return  IR;
