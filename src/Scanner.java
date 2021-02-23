@@ -25,7 +25,7 @@ public class Scanner {
                 String name = "";
                 c= input.read();
 
-                if (c == 32) { // space  --> Mnemonic
+                if (c == 32) {
                     while (c != 10) {
                         c = input.read();
                         if (c != 10 && c != 32) {
