@@ -40,8 +40,11 @@ public class Scanner {
             for (int k =0; k < mnemoic.length;k++) {
                 Token t = new Token(new Position(k+1, 1), mnemoic[k], TokenType.Mnemonic);
                 token.add(t);
+
+
             }
-            System.out.println(token);
+            //for(int h = 0; h < token.size(); h++)
+                //System.out.println(token.get(h).getName());
             input.close();
             return token;
         }
