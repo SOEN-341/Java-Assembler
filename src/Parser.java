@@ -4,14 +4,14 @@ import java.util.ArrayList;
 // receives Arraylist<Token>
 
 public class Parser implements IParser{
-    private ArrayList<String> Mnemonic= new ArrayList<String>();
     private static int Count_Mnemonic=1;
 
     Parser(){
-        Mnemonic=new ArrayList<String>();
+
     }
 
     public ArrayList<String> getMnemonic() {
+        ArrayList<String> Mnemonic= new ArrayList<String>();
         ArrayList<Token> Tokens = Scanner.scanToken();
         int size = Tokens.size();
         for (int i=0; i<size; i++){
@@ -44,6 +44,4 @@ public class Parser implements IParser{
         }
         return  IR;
     }
-
-
 }

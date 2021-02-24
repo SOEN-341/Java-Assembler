@@ -10,5 +10,6 @@ public class TestInstruction {
         System.out.print("Instruct1["+ Instruct1.getMnemonic()+","+ Instruct1.getOperand()+"]");
         System.out.print("\tInstruct2["+ Instruct2.getMnemonic()+","+ Instruct2.getOperand()+"]");
         System.out.print("\tInstruct3["+ Instruct3.getMnemonic()+","+ Instruct3.getOperand()+"]");
+        System.out.println();
     }
 }
