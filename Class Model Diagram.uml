@@ -3,163 +3,165 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="1299.5970971950426" y="1660.0">TestParserMnemonics</node>
-    <node x="1361.157036855838" y="868.0">TestPosition</node>
-    <node x="1656.6653701891714" y="1050.0">Token</node>
-    <node x="934.657036855838" y="126.0">Instruction</node>
-    <node x="949.157036855838" y="0.0">IInstruction</node>
-    <node x="761.657036855838" y="490.0">LineStatement</node>
-    <node x="236.0" y="580.0">IMnemonic</node>
-    <node x="26.25" y="1759.0">Test</node>
-    <node x="927.157036855838" y="1072.0">InterRep</node>
-    <node x="1497.457036855838" y="1351.0">TestToken</node>
-    <node x="2108.665370189171" y="1140.0">IScanner</node>
-    <node x="1490.394683626875" y="512.0">Position</node>
-    <node x="783.25" y="1351.0">TestInterRep</node>
-    <node x="1223.0970971950426" y="1466.0">Parser</node>
-    <node x="653.5382746249189" y="1660.0">Assembler</node>
-    <node x="1962.1653701891712" y="880.0">IReader</node>
-    <node x="1602.407036855838" y="364.0">TestInstruction</node>
-    <node x="1826.625" y="1340.0">Scanner</node>
-    <node x="1939.6653701891712" y="1128.0">Reader</node>
-    <node x="0.0" y="868.0">ISymbolTable</node>
-    <node x="650.25" y="868.0">TestLineStatement</node>
-    <node x="1823.5054305283759" y="523.5">TokenType</node>
-    <node x="1697.1653701891714" y="846.0">IToken</node>
-    <node x="876.657036855838" y="868.0">IInterRep</node>
-    <node x="203.0" y="790.0">Mnemonic</node>
-    <node x="1388.407036855838" y="353.0">IPosition</node>
-    <node x="1.25" y="1908.0">aunit</node>
-    <node x="127.25" y="1105.0">SymbolTable</node>
-    <node x="335.6007746249189" y="1489.0">CodeGenerator</node>
-    <node x="418.25" y="1340.0">ICodeGenerator</node>
-    <node x="808.157036855838" y="342.0">ILineStatement</node>
-    <node x="137.0" y="1351.0">TestSymbolTable</node>
-    <node x="1054.157036855838" y="1340.0">IParser</node>
+    <node x="1764.0893427919111" y="364.0">TestInstruction</node>
+    <node x="1960.5305365296801" y="1330.0">Scanner</node>
+    <node x="1255.1186317677752" y="1648.0">TestParserMnemonics</node>
+    <node x="2168.0660714285714" y="1128.0">Reader</node>
+    <node x="1495.6875" y="868.0">TestPosition</node>
+    <node x="206.0" y="868.0">ISymbolTable</node>
+    <node x="1705.9712654924988" y="1050.0">Token</node>
+    <node x="1290.6875" y="868.0">TestLineStatement</node>
+    <node x="1184.4712654924988" y="126.0">Instruction</node>
+    <node x="1198.9712654924988" y="0.0">IInstruction</node>
+    <node x="1065.2212654924988" y="490.0">LineStatement</node>
+    <node x="33.0" y="580.0">IMnemonic</node>
+    <node x="1923.2893427919112" y="523.5">TokenType</node>
+    <node x="26.25" y="1747.0">Test</node>
+    <node x="1738.3874999999998" y="846.0">IToken</node>
+    <node x="952.625" y="868.0">IInterRep</node>
+    <node x="0.0" y="790.0">Mnemonic</node>
+    <node x="862.625" y="1072.0">InterRep</node>
+    <node x="1706.7893427919112" y="1341.0">TestToken</node>
+    <node x="2035.0660714285714" y="1140.0">IScanner</node>
+    <node x="1550.0893427919111" y="353.0">IPosition</node>
+    <node x="1689.253628506197" y="512.0">Position</node>
+    <node x="1.25" y="1896.0">aunit</node>
+    <node x="24.971265492498787" y="1105.0">SymbolTable</node>
+    <node x="328.3963878016964" y="1488.0">CodeGenerator</node>
+    <node x="1105.6875" y="1341.0">TestInterRep</node>
+    <node x="1186.4519651011085" y="1476.0">Parser</node>
+    <node x="410.0" y="1330.0">ICodeGenerator</node>
+    <node x="1046.9712654924988" y="342.0">ILineStatement</node>
+    <node x="562.2019651011087" y="1648.0">Assembler</node>
+    <node x="33.97126549249879" y="1341.0">TestSymbolTable</node>
+    <node x="2190.5660714285714" y="880.0">IReader</node>
+    <node x="808.6587654924988" y="1330.0">IParser</node>
   </nodes>
   <notes />
   <edges>
     <edge source="Token" target="Position">
-      <point x="-105.20000000000005" y="-105.0" />
-      <point x="1682.9653701891712" y="1030.0" />
-      <point x="1675.6653701891714" y="1030.0" />
-      <point x="1675.6653701891714" y="740.0" />
-      <point x="1615.1089693411607" y="740.0" />
-      <point x="27.71428571428578" y="83.0" />
+      <point x="-105.19999999999999" y="-105.0" />
+      <point x="1732.2712654924987" y="1030.0" />
+      <point x="1716.8874999999998" y="1030.0" />
+      <point x="1716.8874999999998" y="750.0" />
+      <point x="1786.253628506197" y="750.0" />
+      <point x="0.0" y="83.0" />
     </edge>
     <edge source="ILineStatement" target="Instruction">
       <point x="0.0" y="-49.0" />
-      <point x="916.157036855838" y="322.0" />
-      <point x="987.407036855838" y="322.0" />
-      <point x="-52.75" y="83.0" />
+      <point x="1154.9712654924988" y="322.0" />
+      <point x="1202.054598825832" y="322.0" />
+      <point x="-87.91666666666663" y="83.0" />
     </edge>
     <edge source="Reader" target="IReader">
       <point x="0.0" y="-27.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="TestInterRep" target="LineStatement">
-      <point x="-61.5" y="-27.0" />
-      <point x="803.75" y="1290.0" />
-      <point x="639.75" y="1290.0" />
-      <point x="639.75" y="740.0" />
-      <point x="809.657036855838" y="740.0" />
-      <point x="-112.0" y="105.0" />
+      <point x="61.5" y="-27.0" />
+      <point x="1249.1875" y="1310.0" />
+      <point x="1244.1875" y="1310.0" />
+      <point x="1244.1875" y="770.0" />
+      <point x="1241.2212654924988" y="770.0" />
+      <point x="16.0" y="105.0" />
     </edge>
     <edge source="IInterRep" target="LineStatement">
       <point x="0.0" y="-27.0" />
-      <point x="977.157036855838" y="770.0" />
-      <point x="937.657036855838" y="770.0" />
-      <point x="16.0" y="105.0" />
+      <point x="1053.125" y="770.0" />
+      <point x="1177.2212654924988" y="770.0" />
+      <point x="-48.0" y="105.0" />
     </edge>
     <edge source="TestParserMnemonics" target="Parser">
       <point x="-50.0" y="-27.0" />
-      <point x="0.0" y="72.0" />
+      <point x="1305.1186317677752" y="1628.0" />
+      <point x="1312.9519651011085" y="1628.0" />
+      <point x="0.0" y="61.0" />
     </edge>
     <edge source="InterRep" target="LineStatement">
-      <point x="74.0" y="-83.0" />
-      <point x="1112.157036855838" y="1030.0" />
-      <point x="1099.157036855838" y="1030.0" />
-      <point x="1099.157036855838" y="750.0" />
-      <point x="1001.657036855838" y="750.0" />
-      <point x="80.0" y="105.0" />
+      <point x="0.0" y="-83.0" />
+      <point x="973.625" y="1030.0" />
+      <point x="942.125" y="1030.0" />
+      <point x="942.125" y="760.0" />
+      <point x="1145.2212654924988" y="760.0" />
+      <point x="-80.0" y="105.0" />
     </edge>
     <edge source="LineStatement" target="Instruction">
-      <point x="40.0" y="-105.0" />
-      <point x="961.657036855838" y="465.0" />
-      <point x="1034.657036855838" y="465.0" />
-      <point x="1034.657036855838" y="322.0" />
-      <point x="1022.5737035225047" y="322.0" />
-      <point x="-17.583333333333258" y="83.0" />
+      <point x="120.0" y="-105.0" />
+      <point x="1345.2212654924988" y="470.0" />
+      <point x="1295.4712654924988" y="470.0" />
+      <point x="1295.4712654924988" y="322.0" />
+      <point x="1307.554598825832" y="322.0" />
+      <point x="17.583333333333258" y="83.0" />
     </edge>
     <edge source="Scanner" target="Position">
-      <point x="-97.08333333333326" y="-38.0" />
-      <point x="1846.0416666666667" y="1290.0" />
-      <point x="1646.1653701891714" y="1290.0" />
-      <point x="1646.1653701891714" y="750.0" />
-      <point x="1587.394683626875" y="750.0" />
-      <point x="0.0" y="83.0" />
+      <point x="-19.41666666666663" y="-38.0" />
+      <point x="2057.6138698630134" y="1280.0" />
+      <point x="1979.4712654924988" y="1280.0" />
+      <point x="1979.4712654924988" y="750.0" />
+      <point x="1869.396485649054" y="750.0" />
+      <point x="83.14285714285717" y="83.0" />
     </edge>
     <edge source="TestPosition" target="Position">
       <point x="41.0" y="-27.0" />
-      <point x="1484.157036855838" y="770.0" />
-      <point x="1504.2518264840178" y="770.0" />
+      <point x="1618.6875" y="720.0" />
+      <point x="1703.1107713633398" y="720.0" />
       <point x="-83.14285714285711" y="83.0" />
     </edge>
     <edge source="CodeGenerator" target="LineStatement">
       <point x="-46.875" y="-49.0" />
-      <point x="476.2257746249189" y="1446.0" />
-      <point x="407.75" y="1446.0" />
-      <point x="407.75" y="730.0" />
-      <point x="777.657036855838" y="730.0" />
+      <point x="469.0213878016964" y="1456.0" />
+      <point x="399.5" y="1456.0" />
+      <point x="399.5" y="740.0" />
+      <point x="1081.2212654924988" y="740.0" />
       <point x="-144.0" y="105.0" />
     </edge>
     <edge source="Scanner" target="Token">
-      <point x="-58.25" y="-38.0" />
-      <point x="1884.875" y="1280.0" />
-      <point x="1840.7653701891713" y="1280.0" />
-      <point x="52.59999999999991" y="105.0" />
+      <point x="-97.08333333333334" y="-38.0" />
+      <point x="1979.947203196347" y="1300.0" />
+      <point x="1890.0712654924987" y="1300.0" />
+      <point x="52.60000000000002" y="105.0" />
     </edge>
     <edge source="IToken" target="Position">
       <point x="-45.5" y="-49.0" />
-      <point x="1742.6653701891714" y="720.0" />
-      <point x="1670.537540769732" y="720.0" />
-      <point x="83.14285714285711" y="83.0" />
+      <point x="1783.8874999999998" y="770.0" />
+      <point x="1841.6821999347683" y="770.0" />
+      <point x="55.428571428571445" y="83.0" />
     </edge>
     <edge source="Assembler" target="SymbolTable">
       <point x="-61.5" y="-27.0" />
-      <point x="674.0382746249189" y="1640.0" />
-      <point x="126.5" y="1640.0" />
-      <point x="126.5" y="1320.0" />
-      <point x="154.25" y="1320.0" />
+      <point x="582.7019651011087" y="1628.0" />
+      <point x="23.471265492498787" y="1628.0" />
+      <point x="23.471265492498787" y="1310.0" />
+      <point x="51.97126549249879" y="1310.0" />
       <point x="-108.0" y="50.0" />
     </edge>
     <edge source="Assembler" target="CodeGenerator">
       <point x="-20.5" y="-27.0" />
-      <point x="715.0382746249189" y="1630.0" />
-      <point x="523.1007746249189" y="1630.0" />
+      <point x="623.7019651011087" y="1618.0" />
+      <point x="515.8963878016964" y="1618.0" />
       <point x="0.0" y="49.0" />
     </edge>
     <edge source="Scanner" target="TokenType">
-      <point x="97.08333333333348" y="-38.0" />
-      <point x="2040.2083333333335" y="1320.0" />
-      <point x="2231.165370189171" y="1320.0" />
-      <point x="2231.165370189171" y="770.0" />
-      <point x="2014.305430528376" y="770.0" />
-      <point x="84.80000000000018" y="71.5" />
+      <point x="58.25" y="-38.0" />
+      <point x="2135.28053652968" y="1310.0" />
+      <point x="2157.5660714285714" y="1310.0" />
+      <point x="2157.5660714285714" y="770.0" />
+      <point x="2114.0893427919113" y="770.0" />
+      <point x="84.80000000000007" y="71.5" />
     </edge>
     <edge source="TestSymbolTable" target="SymbolTable">
       <point x="-42.0" y="-27.0" />
-      <point x="179.0" y="1320.0" />
-      <point x="208.25" y="1320.0" />
+      <point x="75.97126549249879" y="1310.0" />
+      <point x="105.97126549249879" y="1310.0" />
       <point x="-54.0" y="50.0" />
     </edge>
     <edge source="Parser" target="InterRep">
-      <point x="-36.14285714285711" y="-72.0" />
-      <point x="1313.4542400521855" y="1446.0" />
-      <point x="1328.657036855838" y="1446.0" />
-      <point x="1328.657036855838" y="1300.0" />
-      <point x="1135.282036855838" y="1300.0" />
-      <point x="97.125" y="83.0" />
+      <point x="-72.2857142857141" y="-61.0" />
+      <point x="1240.6662508153945" y="1446.0" />
+      <point x="1072.1587654924988" y="1446.0" />
+      <point x="1072.1587654924988" y="1310.0" />
+      <point x="987.5" y="1310.0" />
+      <point x="13.875" y="83.0" />
     </edge>
     <edge source="Instruction" target="IInstruction">
       <point x="0.0" y="-83.0" />
@@ -167,54 +169,54 @@
     </edge>
     <edge source="IToken" target="TokenType">
       <point x="45.5" y="-49.0" />
-      <point x="1833.6653701891714" y="770.0" />
-      <point x="1887.1054305283758" y="770.0" />
-      <point x="-42.40000000000009" y="71.5" />
+      <point x="1874.8874999999998" y="760.0" />
+      <point x="1944.4893427919112" y="760.0" />
+      <point x="-84.80000000000001" y="71.5" />
     </edge>
     <edge source="TestInstruction" target="Instruction">
       <point x="-42.0" y="-27.0" />
-      <point x="1644.407036855838" y="322.0" />
-      <point x="1092.907036855838" y="322.0" />
+      <point x="1806.0893427919111" y="322.0" />
+      <point x="1342.7212654924988" y="322.0" />
       <point x="52.75" y="83.0" />
     </edge>
     <edge source="Parser" target="Token">
-      <point x="72.28571428571422" y="-72.0" />
-      <point x="1421.8828114807568" y="1436.0" />
-      <point x="1702.207036855838" y="1436.0" />
-      <point x="1702.207036855838" y="1320.0" />
-      <point x="1788.1653701891714" y="1320.0" />
+      <point x="72.28571428571445" y="-61.0" />
+      <point x="1385.237679386823" y="1446.0" />
+      <point x="1881.2893427919112" y="1446.0" />
+      <point x="1881.2893427919112" y="1300.0" />
+      <point x="1837.4712654924988" y="1300.0" />
       <point x="0.0" y="105.0" />
     </edge>
     <edge source="ICodeGenerator" target="InterRep">
       <point x="86.25" y="-38.0" />
-      <point x="677.0" y="1300.0" />
-      <point x="941.032036855838" y="1300.0" />
+      <point x="668.75" y="1280.0" />
+      <point x="876.5" y="1280.0" />
       <point x="-97.125" y="83.0" />
     </edge>
     <edge source="TestToken" target="TokenType">
-      <point x="0.0" y="-27.0" />
-      <point x="1579.457036855838" y="1320.0" />
-      <point x="1557.657036855838" y="1320.0" />
-      <point x="1557.657036855838" y="760.0" />
-      <point x="1844.705430528376" y="760.0" />
-      <point x="-84.79999999999995" y="71.5" />
+      <point x="65.59999999999997" y="-27.0" />
+      <point x="1854.389342791911" y="1310.0" />
+      <point x="2024.5660714285714" y="1310.0" />
+      <point x="2024.5660714285714" y="770.0" />
+      <point x="2071.6893427919113" y="770.0" />
+      <point x="42.40000000000009" y="71.5" />
     </edge>
     <edge source="TestLineStatement" target="LineStatement">
       <point x="-46.0" y="-27.0" />
-      <point x="696.25" y="750.0" />
-      <point x="841.657036855838" y="750.0" />
-      <point x="-80.0" y="105.0" />
+      <point x="1336.6875" y="770.0" />
+      <point x="1305.2212654924988" y="770.0" />
+      <point x="80.0" y="105.0" />
     </edge>
     <edge source="Scanner" target="Reader">
-      <point x="19.416666666666515" y="-38.0" />
-      <point x="1962.5416666666665" y="1300.0" />
-      <point x="2014.1653701891712" y="1300.0" />
+      <point x="97.08333333333337" y="-38.0" />
+      <point x="2174.1138698630134" y="1310.0" />
+      <point x="2242.5660714285714" y="1310.0" />
       <point x="0.0" y="27.0" />
     </edge>
     <edge source="LineStatement" target="ILineStatement">
-      <point x="-40.0" y="-105.0" />
-      <point x="881.657036855838" y="465.0" />
-      <point x="916.157036855838" y="465.0" />
+      <point x="-120.0" y="-105.0" />
+      <point x="1105.2212654924988" y="470.0" />
+      <point x="1154.9712654924988" y="470.0" />
       <point x="0.0" y="49.0" />
     </edge>
     <edge source="Mnemonic" target="IMnemonic">
@@ -223,153 +225,154 @@
     </edge>
     <edge source="aunit" target="Test">
       <point x="-74.25" y="-38.5" />
-      <point x="26.0" y="1883.0" />
-      <point x="44.75" y="1883.0" />
+      <point x="26.0" y="1871.0" />
+      <point x="44.75" y="1871.0" />
       <point x="-55.5" y="49.5" />
     </edge>
     <edge source="Parser" target="IParser">
-      <point x="-108.42857142857133" y="-72.0" />
-      <point x="1241.1685257664712" y="1446.0" />
-      <point x="1180.657036855838" y="1446.0" />
+      <point x="-108.42857142857133" y="-61.0" />
+      <point x="1204.5233936725372" y="1456.0" />
+      <point x="935.1587654924988" y="1456.0" />
       <point x="0.0" y="38.0" />
     </edge>
     <edge source="Parser" target="LineStatement">
-      <point x="36.14285714285711" y="-72.0" />
-      <point x="1385.7399543378997" y="1436.0" />
-      <point x="1350.657036855838" y="1436.0" />
-      <point x="1350.657036855838" y="730.0" />
-      <point x="1065.657036855838" y="730.0" />
-      <point x="144.0" y="105.0" />
+      <point x="1.1368683772161603E-13" y="-61.0" />
+      <point x="1312.9519651011087" y="1426.0" />
+      <point x="1280.1875" y="1426.0" />
+      <point x="1280.1875" y="770.0" />
+      <point x="1273.2212654924988" y="770.0" />
+      <point x="48.0" y="105.0" />
     </edge>
     <edge source="Position" target="IPosition">
       <point x="0.0" y="-83.0" />
-      <point x="1587.394683626875" y="465.0" />
-      <point x="1533.907036855838" y="465.0" />
+      <point x="1786.253628506197" y="470.0" />
+      <point x="1695.5893427919111" y="470.0" />
       <point x="48.5" y="38.0" />
     </edge>
     <edge source="TestPosition" target="IPosition">
       <point x="-41.0" y="-27.0" />
-      <point x="1402.157036855838" y="465.0" />
-      <point x="1436.907036855838" y="465.0" />
+      <point x="1536.6875" y="470.0" />
+      <point x="1598.5893427919111" y="470.0" />
       <point x="-48.5" y="38.0" />
     </edge>
     <edge source="ICodeGenerator" target="SymbolTable">
       <point x="-86.25" y="-38.0" />
-      <point x="504.5" y="1320.0" />
-      <point x="370.25" y="1320.0" />
+      <point x="496.25" y="1300.0" />
+      <point x="267.9712654924988" y="1300.0" />
       <point x="108.0" y="50.0" />
     </edge>
     <edge source="Assembler" target="InterRep">
       <point x="20.5" y="-27.0" />
-      <point x="756.0382746249189" y="1630.0" />
-      <point x="1043.657036855838" y="1630.0" />
-      <point x="1043.657036855838" y="1320.0" />
-      <point x="1052.032036855838" y="1320.0" />
-      <point x="13.875" y="83.0" />
+      <point x="664.7019651011087" y="1618.0" />
+      <point x="798.1587654924988" y="1618.0" />
+      <point x="798.1587654924988" y="1300.0" />
+      <point x="932.0" y="1300.0" />
+      <point x="-41.625" y="83.0" />
     </edge>
     <edge source="SymbolTable" target="Mnemonic">
-      <point x="-33.75" y="-50.0" />
-      <point x="228.5" y="1030.0" />
-      <point x="234.0" y="1030.0" />
+      <point x="-101.25" y="-50.0" />
+      <point x="58.72126549249879" y="1030.0" />
+      <point x="31.0" y="1030.0" />
       <point x="-62.0" y="105.0" />
     </edge>
     <edge source="InterRep" target="IInterRep">
-      <point x="-74.0" y="-83.0" />
-      <point x="964.157036855838" y="1030.0" />
-      <point x="977.157036855838" y="1030.0" />
+      <point x="74.0" y="-83.0" />
+      <point x="1047.625" y="1030.0" />
+      <point x="1053.125" y="1030.0" />
       <point x="0.0" y="27.0" />
     </edge>
     <edge source="CodeGenerator" target="SymbolTable">
       <point x="-140.625" y="-49.0" />
-      <point x="382.4757746249189" y="1446.0" />
-      <point x="336.6632746249189" y="1446.0" />
-      <point x="336.6632746249189" y="1320.0" />
-      <point x="316.25" y="1320.0" />
+      <point x="375.2713878016964" y="1456.0" />
+      <point x="282.3462654924988" y="1456.0" />
+      <point x="282.3462654924988" y="1310.0" />
+      <point x="213.9712654924988" y="1310.0" />
       <point x="54.0" y="50.0" />
     </edge>
     <edge source="SymbolTable" target="ISymbolTable">
-      <point x="-101.25" y="-50.0" />
-      <point x="161.0" y="1030.0" />
-      <point x="91.5" y="1030.0" />
+      <point x="101.25" y="-50.0" />
+      <point x="261.2212654924988" y="1030.0" />
+      <point x="297.5" y="1030.0" />
       <point x="0.0" y="27.0" />
     </edge>
     <edge source="TestToken" target="Token">
-      <point x="32.799999999999955" y="-27.0" />
-      <point x="1612.257036855838" y="1300.0" />
-      <point x="1682.9653701891712" y="1300.0" />
-      <point x="-105.20000000000005" y="105.0" />
+      <point x="0.0" y="-27.0" />
+      <point x="1788.7893427919112" y="1290.0" />
+      <point x="1732.2712654924987" y="1290.0" />
+      <point x="-105.19999999999999" y="105.0" />
     </edge>
     <edge source="CodeGenerator" target="InterRep">
       <point x="140.625" y="-49.0" />
-      <point x="663.7257746249189" y="1446.0" />
-      <point x="1009.8899135681677" y="1446.0" />
-      <point x="1009.8899135681677" y="1320.0" />
-      <point x="1024.282036855838" y="1320.0" />
-      <point x="-13.875" y="83.0" />
+      <point x="656.5213878016964" y="1456.0" />
+      <point x="765.5" y="1456.0" />
+      <point x="765.5" y="1290.0" />
+      <point x="904.25" y="1290.0" />
+      <point x="-69.375" y="83.0" />
     </edge>
     <edge source="CodeGenerator" target="ICodeGenerator">
       <point x="46.875" y="-49.0" />
-      <point x="569.9757746249189" y="1446.0" />
-      <point x="590.75" y="1446.0" />
+      <point x="562.7713878016964" y="1456.0" />
+      <point x="582.5" y="1456.0" />
       <point x="0.0" y="38.0" />
     </edge>
     <edge source="TestToken" target="Position">
-      <point x="-65.59999999999991" y="-27.0" />
-      <point x="1513.857036855838" y="1320.0" />
-      <point x="1535.657036855838" y="1320.0" />
-      <point x="1535.657036855838" y="770.0" />
-      <point x="1531.9661121983036" y="770.0" />
-      <point x="-55.42857142857133" y="83.0" />
+      <point x="-32.799999999999955" y="-27.0" />
+      <point x="1755.9893427919112" y="1300.0" />
+      <point x="1681.1875" y="1300.0" />
+      <point x="1681.1875" y="740.0" />
+      <point x="1758.5393427919112" y="740.0" />
+      <point x="-27.714285714285666" y="83.0" />
     </edge>
     <edge source="Parser" target="Scanner">
-      <point x="108.42857142857133" y="-72.0" />
-      <point x="1458.025668623614" y="1446.0" />
-      <point x="1943.125" y="1446.0" />
+      <point x="108.42857142857167" y="-61.0" />
+      <point x="1421.3805365296803" y="1456.0" />
+      <point x="2077.03053652968" y="1456.0" />
       <point x="0.0" y="38.0" />
     </edge>
     <edge source="Scanner" target="IScanner">
-      <point x="58.25" y="-38.0" />
-      <point x="2001.375" y="1310.0" />
-      <point x="2164.665370189171" y="1310.0" />
+      <point x="19.416666666666686" y="-38.0" />
+      <point x="2096.447203196347" y="1310.0" />
+      <point x="2091.0660714285714" y="1310.0" />
       <point x="0.0" y="15.0" />
     </edge>
     <edge source="Assembler" target="Parser">
       <point x="61.5" y="-27.0" />
-      <point x="797.0382746249189" y="1640.0" />
-      <point x="1265.2637638617093" y="1640.0" />
-      <point x="-84.33333333333326" y="72.0" />
+      <point x="705.7019651011087" y="1628.0" />
+      <point x="1228.6186317677752" y="1628.0" />
+      <point x="-84.33333333333337" y="61.0" />
     </edge>
     <edge source="Token" target="TokenType">
       <point x="105.20000000000005" y="-105.0" />
-      <point x="1893.3653701891712" y="1030.0" />
-      <point x="1913.735746901501" y="1030.0" />
-      <point x="1913.735746901501" y="770.0" />
-      <point x="1971.905430528376" y="770.0" />
-      <point x="42.40000000000009" y="71.5" />
+      <point x="1942.6712654924986" y="1030.0" />
+      <point x="2013.5660714285714" y="1030.0" />
+      <point x="2013.5660714285714" y="760.0" />
+      <point x="2029.2893427919112" y="760.0" />
+      <point x="0.0" y="71.5" />
     </edge>
     <edge source="Token" target="IToken">
       <point x="0.0" y="-105.0" />
+      <point x="1837.4712654924988" y="1030.0" />
+      <point x="1829.3874999999998" y="1030.0" />
       <point x="0.0" y="49.0" />
     </edge>
     <edge source="IParser" target="InterRep">
       <point x="0.0" y="-38.0" />
-      <point x="1180.657036855838" y="1320.0" />
-      <point x="1079.782036855838" y="1320.0" />
-      <point x="41.625" y="83.0" />
+      <point x="935.1587654924988" y="1310.0" />
+      <point x="959.75" y="1310.0" />
+      <point x="-13.875" y="83.0" />
     </edge>
     <edge source="TestInterRep" target="InterRep">
-      <point x="20.5" y="-27.0" />
-      <point x="885.75" y="1310.0" />
-      <point x="968.782036855838" y="1310.0" />
-      <point x="-69.375" y="83.0" />
+      <point x="-61.5" y="-27.0" />
+      <point x="1126.1875" y="1290.0" />
+      <point x="1043.0" y="1290.0" />
+      <point x="69.375" y="83.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="1571.0" y="435.0" />
+  <settings layout="Hierarchic Group" zoom="0.9" x="985.1111111111111" y="492.88888888888886" />
   <SelectedNodes>
-    <node>ICodeGenerator</node>
+    <node>TestInstruction</node>
   </SelectedNodes>
   <Categories>
-    <Category>Inner Classes</Category>
     <Category>Methods</Category>
     <Category>Constructors</Category>
     <Category>Fields</Category>
