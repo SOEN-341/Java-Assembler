@@ -6,7 +6,6 @@ public class Scanner implements IScanner{
     public static ArrayList<Token> scanToken()  {
 
         File f = null;
-        File copy = null;
         FileInputStream input = null;
         int c = 0;
         int i=0;
