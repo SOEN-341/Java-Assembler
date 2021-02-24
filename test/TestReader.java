@@ -7,7 +7,7 @@ public class TestReader {
 
         System.out.println("Test Reader");
         System.out.println("equal");
-        File f = new File("/Users/alirezaziarizi/Documents/Winter 2021/COMP 472/Java-Assembler/TestInherentMnemonics.asm");
+        File f = new File("TestInherentMnemonics.asm");
         File c = new File("/Users/alirezaziarizi/Documents/Winter 2021/COMP 472/Java-Assembler/copiedTestInherentMnemonics.asm");
         // Reader.readFile(f);
         FileInputStream original = new FileInputStream(f);
@@ -25,6 +25,8 @@ public class TestReader {
         }
         else
             System.out.println("equal");
+        original.close();
+        copied.close();
     }
 }
 

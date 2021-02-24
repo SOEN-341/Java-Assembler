@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class Scanner implements IScanner{
+public class Scanner{
 
     public static ArrayList<Token> scanToken()  {
 
@@ -11,6 +11,7 @@ public class Scanner implements IScanner{
         int i=0;
         ArrayList<Token> token = null;
         String str = "";
+        String [] mnemoic = new String[26];
         ArrayList<String> mnemoic1= new ArrayList<String>();
         try {
             token = new ArrayList<Token>();
@@ -20,8 +21,7 @@ public class Scanner implements IScanner{
             while (c != -1)
             {
                 String name = "";
-                c= input.read();
-
+                c = input.read();
                 if (c == 32) {
                     while (c != 10) {
                         c = input.read();
@@ -30,7 +30,6 @@ public class Scanner implements IScanner{
                         }
                     }
                     mnemoic1.add(name);
-                    i++;
                 }
 
             }
@@ -41,7 +40,7 @@ public class Scanner implements IScanner{
 
             }
 
-               // System.out.println(token);
+         // System.out.println(token);
             input.close();
             return token;
         }
@@ -52,6 +51,7 @@ public class Scanner implements IScanner{
     }
     public static void main(String[] args) {
         scanToken();
+
     }
 
 }
