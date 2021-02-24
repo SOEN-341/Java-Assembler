@@ -13,11 +13,11 @@ public class Scanner implements IScanner{
         ArrayList<Token> token = null;
         String str = "";
         String [] mnemoic = new String[26];
+        ArrayList<String> mnemoic1= new ArrayList<String>();
         try {
             token = new ArrayList<Token>();
-            f = new File("TestInherentMnemonics.asm");
-            copy = Reader.readFile(f); // filed copy here
-            input = new FileInputStream(copy); // opening the new stream on copied file.
+            f = new File("copiedTestInherentMnemonics.asm");
+            input = new FileInputStream(f); // opening the new stream on copied file.
 
             while (c != -1)
             {
@@ -31,19 +31,19 @@ public class Scanner implements IScanner{
                             name += (char)c;
                         }
                     }
-                    mnemoic[i] = name;
+                    mnemoic1.add(name);
                     i++;
                 }
 
             }
             for (int k =0; k < mnemoic.length;k++) {
-                Token t = new Token(new Position(k+1, 1), mnemoic[k], TokenType.Mnemonic);
+                Token t = new Token(new Position(k+1, 1), mnemoic1.get(k), TokenType.Mnemonic);
                 token.add(t);
 
 
             }
-            //for(int h = 0; h < token.size(); h++)
-                //System.out.println(token.get(h).getName());
+
+                //System.out.println(token);
             input.close();
             return token;
         }
