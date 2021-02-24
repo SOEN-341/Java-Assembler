@@ -43,7 +43,7 @@ public class Scanner implements IScanner{
 
             }
 
-                //System.out.println(token);
+                System.out.println(token);
             input.close();
             return token;
         }
