@@ -5,5 +5,6 @@ public class TestSymbolTable {
         System.out.println(0x1A);
         System.out.println(Table.getOpcode("teq"));
 
+
     }
 }

@@ -1,8 +1,8 @@
-public class Mnemonic {
+public class Mnemonic implements IMnemonic{
     String name;
     int Opcode;
 
-    public Mnemonic(String name, int opcode) {
+    Mnemonic(String name, int opcode) {
         this.name = name;
         Opcode = opcode;
     }
