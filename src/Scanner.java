@@ -15,8 +15,10 @@ public class Scanner{
         ArrayList<String> mnemoic1= new ArrayList<String>();
         try {
             token = new ArrayList<Token>();
-            f = new File("copiedTestInherentMnemonics.asm");
-            input = new FileInputStream(f); // opening the new stream on copied file.
+            f = new File("TestInherentMnemonics.asm");
+            File copy = Reader.readFile(f);
+
+            input = new FileInputStream(copy); // opening the new stream on copied file.
 
             while (c != -1)
             {
