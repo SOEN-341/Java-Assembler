@@ -24,9 +24,9 @@ public class LineStatement implements ILineStatement {
     @Override
     public String toString() {
         return "LineStatement{" +
-                "label='" + label + '\'' +
-                ", instruction=" + instruction +
-                ", Comments='" + Comments + '\'' +
-                '}';
+                "label=" + getLabel() +", "+
+                getInstruction() +
+                ", Comments=" + getComments() +
+                "}";
     }
 }

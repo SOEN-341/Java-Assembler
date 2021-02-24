@@ -12,7 +12,7 @@ public class Parser implements IParser{
     }
 
     public ArrayList<String> getMnemonic() {
-        ArrayList<Token> Tokens= Scanner.scanToken();
+        ArrayList<Token> Tokens = Scanner.scanToken();
         int size = Tokens.size();
         for (int i=0; i<size; i++){
             int LineNumber = Tokens.get(i).getPosition().getLineNumber();
@@ -24,18 +24,20 @@ public class Parser implements IParser{
                 Count_Mnemonic++;
                 continue;
             }
+            // not required for sprint 2
             if ( LineNumber == Count_Mnemonic+1){
                 Mnemonic.add("");
                 Count_Mnemonic++;
             }
         }
         Mnemonic.trimToSize();
+
         return Mnemonic;
     }
 
     public InterRep generates ()  {
         InterRep IR = new InterRep();
-        ArrayList<String> Mme=getMnemonic();
+        ArrayList<String> Mme = getMnemonic();
         for ( int i=0; i<Mme.size(); i++){
             LineStatement Line = new LineStatement("", Mme.get(i).trim(),"","" );
             IR.add(Line);

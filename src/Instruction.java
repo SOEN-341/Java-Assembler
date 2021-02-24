@@ -17,9 +17,9 @@ public class Instruction implements IInstruction{
 
     @Override
     public String toString() {
-        return "Instruction{" +
-                "Mnemonic='" + Mnemonic + '\'' +
-                ", Operand='" + Operand + '\'' +
-                '}';
+        return "Instruction=[" +
+                "Mnemonic=" + Mnemonic +
+                ", Operand=" + Operand +
+                "]";
     }
 }
