@@ -3,7 +3,6 @@ import java.util.ArrayList;
 
 public class Scanner implements IScanner{
 
-
     public static ArrayList<Token> scanToken()  {
 
         File f = null;

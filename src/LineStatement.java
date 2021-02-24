@@ -3,7 +3,7 @@ public class LineStatement implements ILineStatement {
     private Instruction instruction;
     private String Comments;
 
-    public LineStatement(String label,String mne,String operand, String comments) {
+    LineStatement(String label,String mne,String operand, String comments) {
         this.label = label;
         this.instruction= new Instruction(mne, operand);
         Comments = comments;

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class InterRep implements IInterRep {
 
     private ArrayList<LineStatement>IR;
-    public InterRep(){
+    InterRep(){
         this.IR = new ArrayList<LineStatement>();
     }
     public LineStatement getLS(int index){

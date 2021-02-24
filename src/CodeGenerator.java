@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.File;
 import java.util.Locale;
 
-// recieve
+// receive
 public class CodeGenerator implements ICodeGenerator{
 
     public static void generateListing(InterRep IR, SymbolTable Table, File f){
