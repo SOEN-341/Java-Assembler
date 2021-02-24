@@ -12,7 +12,6 @@ public class Scanner implements IScanner{
         int i=0;
         ArrayList<Token> token = null;
         String str = "";
-        String [] mnemoic = new String[26];
         ArrayList<String> mnemoic1= new ArrayList<String>();
         try {
             token = new ArrayList<Token>();
@@ -36,14 +35,14 @@ public class Scanner implements IScanner{
                 }
 
             }
-            for (int k =0; k < mnemoic.length;k++) {
+            for (int k =0; k < mnemoic1.size();k++) {
                 Token t = new Token(new Position(k+1, 1), mnemoic1.get(k), TokenType.Mnemonic);
                 token.add(t);
 
 
             }
 
-                System.out.println(token);
+               // System.out.println(token);
             input.close();
             return token;
         }
