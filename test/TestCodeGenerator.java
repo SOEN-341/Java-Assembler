@@ -17,13 +17,13 @@ public class TestCodeGenerator {
         int i = 0;
         int count = 0;
         String actual = "";
-        while(i != -1){
+        while(i != -1){ // end of file
             i = is.read();
             actual += (char)i;
-            if(i == '\n'){
+            if(i == '\n'){ // counting lines
                 count++;
             }
-            if(count == 2){
+            if(count == 2){ // break when two lines are read
                 break;
             }
         }
