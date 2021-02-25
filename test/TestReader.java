@@ -7,9 +7,8 @@ public class TestReader {
 
         System.out.println("Test Reader");
         System.out.println("equal");
-        File f = new File("/Users/alirezaziarizi/Documents/Winter 2021/COMP 472/Java-Assembler/copiedTestInherentMnemonics.asm");
-        File c = new File("/Users/alirezaziarizi/Documents/Winter 2021/COMP 472/Java-Assembler/copiedTestInherentMnemonics.asm");
-        // Reader.readFile(f);
+        File f = new File("TestInherentMnemonics.asm");
+        File c = new File("copiedTestInherentMnemonics.asm");
         FileInputStream original = new FileInputStream(f);
         FileInputStream copied = new FileInputStream (c);
         int i=0;

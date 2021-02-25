@@ -25,9 +25,9 @@ public class Scanner{
                 String name = "";
                 c = input.read();
                 if (c == 32) {
-                    while (c != 10) {
+                    while (c != 10 && c !=-1) {
                         c = input.read();
-                        if (c != 10 && c != 32) {
+                        if (c != 10 && c != 32 && c !=-1) {
                             name += (char)c;
                         }
                     }
