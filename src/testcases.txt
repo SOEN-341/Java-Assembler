@@ -1,0 +1,15 @@
+Test Instruction
+Instruct1[halt,i3]	Instruct2[stv,u3]	Instruct3[dup,]
+Instruct1[halt,i3]	Instruct2[stv,u3]	Instruct3[dup,]
+Test LineStatement
+LineStatement{label=Done, Instruction=[Mnemonic=halt, Operand=i3], Comments=Nothing}	LineStatement{label=loop, Instruction=[Mnemonic=xor, Operand=i3], Comments=}	LineStatement{label=continue, Instruction=[Mnemonic=rem, Operand=], Comments=}
+LineStatement{label=Done, Instruction=[Mnemonic=halt, Operand=i3], Comments=Nothing}	LineStatement{label=loop, Instruction=[Mnemonic=xor, Operand=i3], Comments=}	LineStatement{label=continue, Instruction=[Mnemonic=rem, Operand=], Comments=}
+Test Intermediate Representation
+Intermediate representation: First Line [LineStatement{label=Done, Instruction=[Mnemonic=halt, Operand=i3], Comments=Nothing}]. Second Line [LineStatement{label=loop, Instruction=[Mnemonic=xor, Operand=i3], Comments=}]. The size of the Intermediate representation is 2.
+Intermediate representation: First Line [LineStatement{label=Done, Instruction=[Mnemonic=halt, Operand=i3], Comments=Nothing}]. Second Line [LineStatement{label=loop, Instruction=[Mnemonic=xor, Operand=i3], Comments=}]. The size of the Intermediate representation is 2.
+Test Parser for getMnemonics
+The first mnemonic is 'halt'. The second mnemonic is 'pop'. The third mnemonic is 'dup'.
+The first mnemonic is 'halt'. The second mnemonic is 'pop'. The third mnemonic is 'dup'.
+Test Parser for generates
+Intermediate representation: First Line [LineStatement{label=, Instruction=[Mnemonic=halt, Operand=], Comments=}]. Second Line [LineStatement{label=, Instruction=[Mnemonic=pop, Operand=], Comments=}]
+Intermediate representation: First Line [LineStatement{label=, Instruction=[Mnemonic=halt, Operand=], Comments=}]. Second Line [LineStatement{label=, Instruction=[Mnemonic=pop, Operand=], Comments=}]
