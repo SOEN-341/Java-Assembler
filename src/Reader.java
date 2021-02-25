@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class Reader{
+public class Reader implements IReader{
 
     public static File readFile(File f) throws IOException {
         FileInputStream input = null;

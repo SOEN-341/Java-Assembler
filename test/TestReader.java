@@ -1,7 +1,7 @@
 import java.io.FileInputStream;
 import java.io.*;
 
-public class TestReader {
+public class TestReader extends Reader {
     public static void main(String[] args) throws IOException{
 
 

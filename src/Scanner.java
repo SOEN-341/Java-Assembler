@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class Scanner{
+public class Scanner implements IScanner{
 
     public static ArrayList<Token> scanToken()  {
 
