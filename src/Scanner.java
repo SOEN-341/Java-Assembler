@@ -10,9 +10,7 @@ public class Scanner{
         int c = 0;
         int i=0;
         ArrayList<Token> token = null;
-        String str = "";
-        String [] mnemoic = new String[26];
-        ArrayList<String> mnemoic1= new ArrayList<String>();
+        ArrayList<String> mnemoic= new ArrayList<String>();
         try {
             token = new ArrayList<Token>();
             f = new File("TestInherentMnemonics.asm");
@@ -31,18 +29,14 @@ public class Scanner{
                             name += (char)c;
                         }
                     }
-                    mnemoic1.add(name);
+                    mnemoic.add(name);
                 }
 
             }
-            for (int k =0; k < mnemoic1.size();k++) {
-                Token t = new Token(new Position(k+1, 1), mnemoic1.get(k), TokenType.Mnemonic);
+            for (int k =0; k < mnemoic.size();k++) {
+                Token t = new Token(new Position(k+1, 1), mnemoic.get(k), TokenType.Mnemonic);
                 token.add(t);
-
-
             }
-
-         // System.out.println(token);
             input.close();
             return token;
         }
@@ -50,10 +44,6 @@ public class Scanner{
             e.printStackTrace();
         }
         return token;
-    }
-    public static void main(String[] args) {
-        scanToken();
-
     }
 
 }
