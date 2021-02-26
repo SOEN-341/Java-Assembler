@@ -1,0 +1,30 @@
+Test Reader
+equal
+equal
+Test Mnemonic
+Mnemonic{name='halt', Opcode='0'}Mnemonic{name='pop', Opcode='1'}
+Mnemonic{name='halt', Opcode='0'}Mnemonic{name='pop', Opcode='1'}
+Test Scanner
+[[halt(1,1)=Mnemonic], [pop(2,1)=Mnemonic], [dup(3,1)=Mnemonic], [exit(4,1)=Mnemonic], [ret(5,1)=Mnemonic], [not(6,1)=Mnemonic], [and(7,1)=Mnemonic], [or(8,1)=Mnemonic], [xor(9,1)=Mnemonic], [neg(10,1)=Mnemonic], [inc(11,1)=Mnemonic], [dec(12,1)=Mnemonic], [add(13,1)=Mnemonic], [sub(14,1)=Mnemonic], [mul(15,1)=Mnemonic], [div(16,1)=Mnemonic], [rem(17,1)=Mnemonic], [shl(18,1)=Mnemonic], [shr(19,1)=Mnemonic], [teq(20,1)=Mnemonic], [tne(21,1)=Mnemonic], [tlt(22,1)=Mnemonic], [tgt(23,1)=Mnemonic], [tle(24,1)=Mnemonic], [tge(25,1)=Mnemonic], [halt(26,1)=Mnemonic]]
+[[halt(1,1)=Mnemonic], [pop(2,1)=Mnemonic], [dup(3,1)=Mnemonic], [exit(4,1)=Mnemonic], [ret(5,1)=Mnemonic], [not(6,1)=Mnemonic], [and(7,1)=Mnemonic], [or(8,1)=Mnemonic], [xor(9,1)=Mnemonic], [neg(10,1)=Mnemonic], [inc(11,1)=Mnemonic], [dec(12,1)=Mnemonic], [add(13,1)=Mnemonic], [sub(14,1)=Mnemonic], [mul(15,1)=Mnemonic], [div(16,1)=Mnemonic], [rem(17,1)=Mnemonic], [shl(18,1)=Mnemonic], [shr(19,1)=Mnemonic], [teq(20,1)=Mnemonic], [tne(21,1)=Mnemonic], [tlt(22,1)=Mnemonic], [tgt(23,1)=Mnemonic], [tle(24,1)=Mnemonic], [tge(25,1)=Mnemonic], [halt(26,1)=Mnemonic]]
+Test lineStatetolst
+6    0005 00                          halt
+6    0005 00                          halt
+Test generateLst
+Line Addr Code          Label         Mne   Operand       Comments1    0000 00                          halt
+Line Addr Code          Label         Mne   Operand       Comments1    0000 00                          halt
+Test Instruction
+Instruct1[halt,i3]	Instruct2[stv,u3]	Instruct3[dup,]
+Instruct1[halt,i3]	Instruct2[stv,u3]	Instruct3[dup,]
+Test LineStatement
+LineStatement{label=Done, Instruction=[Mnemonic=halt, Operand=i3], Comments=Nothing}	LineStatement{label=loop, Instruction=[Mnemonic=xor, Operand=i3], Comments=}	LineStatement{label=continue, Instruction=[Mnemonic=rem, Operand=], Comments=}
+LineStatement{label=Done, Instruction=[Mnemonic=halt, Operand=i3], Comments=Nothing}	LineStatement{label=loop, Instruction=[Mnemonic=xor, Operand=i3], Comments=}	LineStatement{label=continue, Instruction=[Mnemonic=rem, Operand=], Comments=}
+Test Intermediate Representation
+Intermediate representation: First Line [LineStatement{label=Done, Instruction=[Mnemonic=halt, Operand=i3], Comments=Nothing}]. Second Line [LineStatement{label=loop, Instruction=[Mnemonic=xor, Operand=i3], Comments=}]. The size of the Intermediate representation is 2.
+Intermediate representation: First Line [LineStatement{label=Done, Instruction=[Mnemonic=halt, Operand=i3], Comments=Nothing}]. Second Line [LineStatement{label=loop, Instruction=[Mnemonic=xor, Operand=i3], Comments=}]. The size of the Intermediate representation is 2.
+Test Parser for getMnemonics
+The first mnemonic is 'halt'. The second mnemonic is 'pop'. The third mnemonic is 'dup'.
+The first mnemonic is 'halt'. The second mnemonic is 'pop'. The third mnemonic is 'dup'.
+Test Parser for generates
+Intermediate representation: First Line [LineStatement{label=, Instruction=[Mnemonic=halt, Operand=], Comments=}]. Second Line [LineStatement{label=, Instruction=[Mnemonic=pop, Operand=], Comments=}]
+Intermediate representation: First Line [LineStatement{label=, Instruction=[Mnemonic=halt, Operand=], Comments=}]. Second Line [LineStatement{label=, Instruction=[Mnemonic=pop, Operand=], Comments=}]
