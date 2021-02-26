@@ -1,6 +1,0 @@
-Test lineStatetolst
-6    0005 00                          halt
-6    0005 00                          halt
-Test generateLst
-Line Addr Code          Label         Mne   Operand       Comments1    0000 00                          halt
-Line Addr Code          Label         Mne   Operand       Comments1    0000 00                          halt
