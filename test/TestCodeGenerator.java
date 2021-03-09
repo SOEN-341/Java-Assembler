@@ -6,11 +6,11 @@ public class TestCodeGenerator {
     public static void main(String[] args) throws IOException{
         System.out.println("Test lineStatetolst");
         System.out.println("6    0005 00                          halt");
-        System.out.println(CodeGenerator.lineStatetolst(5, new LineStatement(null, "halt",null, null),new SymbolTable()));
+        System.out.println(new CodeGenerator(null, new SymbolTable(), new File("TestInherentMnemonics.asm")).lineStatetolst(5, new LineStatement(null, "halt",null, null),new SymbolTable()));
         System.out.println("Test generateLst");
         InterRep IR = new Parser().generates();
 
-        CodeGenerator.generateListing(IR, new SymbolTable(), new File("copiedTestInherentMnemonics.asm"));
+        new CodeGenerator(IR, new SymbolTable(), new File("copiedTestInherentMnemonics.asm")).generateListing();
 
         InputStream is = new FileInputStream(new File ("TestInherentMnemonics.lst"));
 

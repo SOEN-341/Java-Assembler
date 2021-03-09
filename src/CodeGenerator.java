@@ -5,20 +5,28 @@ import java.util.Locale;
 
 // receive
 public class CodeGenerator implements ICodeGenerator{
+    private InterRep IR;
+    private SymbolTable Table;
+    private File f;
+    public CodeGenerator(InterRep IR, SymbolTable Table, File f){
+        this.IR = IR;
+        this.Table = Table;
+        this.f = f;
+    }
 
-    public static void generateListing(InterRep IR, SymbolTable Table, File f){
+    public void generateListing(){
         String header = "Line Addr Code          Label         Mne   Operand       Comments";
         FileOutputStream foS = null;
         try{
-            foS = new FileOutputStream(new File(f.getName().replace(".asm", ".lst").replace("copied", "")));
+            foS = new FileOutputStream(new File(this.f.getName().replace(".asm", ".lst").replace("copied", "")));
             String currentLine = "";
 
             for(int i = 0; i < header.length();i++){
                 foS.write(header.charAt(i));
             }
             foS.write('\n');
-            for(int i = 0; i < IR.getSize(); i++){
-                currentLine = lineStatetolst(i, IR.getLS(i), Table);
+            for(int i = 0; i < this.IR.getSize(); i++){
+                currentLine = lineStatetolst(i, this.IR.getLS(i), Table);
                 for(int j = 0;j < currentLine.length(); j++){
                     foS.write(currentLine.charAt(j));
                 }
@@ -41,7 +49,7 @@ public class CodeGenerator implements ICodeGenerator{
 
     }
 
-    public static String lineStatetolst(int lineNum, LineStatement lS, SymbolTable Table){
+    public String lineStatetolst(int lineNum, LineStatement lS, SymbolTable Table){
         String hex = Integer.toHexString(lineNum).toUpperCase();
         String opCode = Integer.toHexString(Table.getOpcode(lS.getInstruction().getMnemonic())).toUpperCase();
         return String.format("%1$-4s", lineNum + 1) + " " + String.format("%1$4s", hex).replace(" ", "0") +

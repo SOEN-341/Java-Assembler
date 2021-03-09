@@ -1,5 +1,6 @@
 import java.io.File;
 public interface ICodeGenerator {
-    public static void generateListing(InterRep IR, SymbolTable Table, File f){};
+    public void generateListing();
     public void generateExecutable();
+    public String lineStatetolst(int lineNum, LineStatement lS, SymbolTable Table);
 }
