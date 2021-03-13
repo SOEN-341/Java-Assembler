@@ -1,14 +1,30 @@
 import java.io.*;
 
-public class Reader implements IReader{
+public class Reader{
+    // reader will read one char and pass it to scanner to create a token
+    private FileInputStream f;
 
-    public static File readFile(File f) throws IOException {
+
+
+    public Reader() {
+        // this.c = ' ';
+        try{
+            File copied =  copy(new File("TestInherentMnemonics.asm"));
+            f = new FileInputStream(copied);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public File copy(File f) throws IOException {
         FileInputStream input = null;
         FileOutputStream output = null;
         int c = 0;
         File out = null;
 
-        try {
+        try { // create a copie of the original file
 
             out = new File("copied" + f.getName());
             input = new FileInputStream(f);
@@ -20,7 +36,6 @@ public class Reader implements IReader{
             input.close();
             output.close();
 
-            return out;
         }
 
         catch(IOException e) {
@@ -30,5 +45,15 @@ public class Reader implements IReader{
     }
 
 
+    public int readChar () throws IOException{
+        int c;
+        c =  f.read();
+        return c;
+
+    }
+
+    public void closeInputStream() throws IOException{
+        f.close();
+    }
 }
 
