@@ -6,10 +6,10 @@ public class Reader{
 
 
 
-    public Reader() {
-        // this.c = ' ';
+    public Reader(File file) {
+
         try{
-            File copied =  copy(new File("TestInherentMnemonics.asm"));
+            File copied =  copy(file);
             f = new FileInputStream(copied);
         }
         catch(IOException e){

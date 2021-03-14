@@ -4,8 +4,9 @@ import java.util.ArrayList;
 public class Scanner{
     private Reader r1;
 
-    public Scanner() {
-        r1 = new Reader();
+    public Scanner(Reader reader) {
+       reader = new Reader(new File("TestInherentMnemonics.asm"));
+       this.r1 = reader;
     }
 
     public Token scanToken()  {

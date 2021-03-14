@@ -1,6 +1,11 @@
+import java.io.File;
 
 public interface IReader {
 
-    // Reader class contains static methods only
+    public File copy(File f);
+
+    public int readChar ();
+
+    public void closeInputStream();
 
 }
