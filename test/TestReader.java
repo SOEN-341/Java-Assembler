@@ -1,31 +1,18 @@
 import java.io.FileInputStream;
 import java.io.*;
 
-public class TestReader extends Reader {
+
+public class TestReader {
     public static void main(String[] args) throws IOException{
 
 
         System.out.println("Test Reader");
         System.out.println("equal");
-        File f = new File("TestInherentMnemonics.asm");
-        File c = new File("copiedTestInherentMnemonics.asm");
-        FileInputStream original = new FileInputStream(f);
-        FileInputStream copied = new FileInputStream (c);
-        int i=0;
-        int j=0;
-        while (i!= -1 && j!=-1) {
-            i=original.read();
-            j=copied.read();
-            if (i!=j)
-                break;
-        }
-        if (i!=j) {
-            System.out.println("not equal");
-        }
-        else
-            System.out.println("equal");
-        original.close();
-        copied.close();
+        Reader r1 = new Reader(new File("TestInherentMnemonics.asm"));
+        System.out.println("h");
+        r1.readChar();
+        System.out.println(r1.readChar());
+
     }
 }
 
