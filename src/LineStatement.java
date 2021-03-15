@@ -2,11 +2,18 @@ public class LineStatement implements ILineStatement {
     private String label;
     private Instruction instruction;
     private String Comments;
+    private String directive;
 
     LineStatement(String label,String mne,String operand, String comments) {
         this.label = label;
         this.instruction= new Instruction(mne, operand);
-        Comments = comments;
+        this.Comments = comments;
+    }
+
+    LineStatement(String label,String directive, String comments) {
+        this.label = label;
+        this.directive = directive;
+        this.Comments = comments;
     }
 
     public Instruction getInstruction() {

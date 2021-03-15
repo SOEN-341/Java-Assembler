@@ -6,12 +6,15 @@ public class InterRep implements IInterRep {
     InterRep(){
         this.IR = new ArrayList<LineStatement>();
     }
+
     public LineStatement getLS(int index){
         return IR.get(index);
     }
+
     public int getSize(){
         return this.IR.size();
     }
+
     public void add(LineStatement ls){
         this.IR.add(ls);
     }
