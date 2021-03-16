@@ -4,8 +4,6 @@ public class Reader{
     // reader will read one char and pass it to scanner to create a token
     private FileInputStream f;
 
-
-
     public Reader(File file) {
 
         try{
