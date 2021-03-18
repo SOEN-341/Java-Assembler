@@ -1,17 +1,20 @@
 import java.io.*;
-import java.util.ArrayList;
 
 public class Scanner{
-    private Reader r1;
+    private Reader reader;
     private int line = 1;
     private int column = 1;
-    private int pointer;
+    private int character;
+    private int index=0;
+    private Token token;
 
 
     public Scanner() {
-        r1 = new Reader(new File("TestImmediate.asm"));
+        reader = new Reader(new File("TestImmediate.asm"));
+        token = new Token(new Position(line, column), "", null);
+
         try {
-            this.pointer = r1.readChar();
+            this.character = reader.readChar();
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -22,68 +25,88 @@ public class Scanner{
         String mnemonic = "";
         String comment="";
         String operand="";
-        Token t = null;
+        String label ="";
 
         try {
             do{
-                if(pointer == 59){
-                    while(pointer != 10){ // if first char is a ; then we will read until new line and output a comment
-                        comment += (char)pointer;
-                        pointer = r1.readChar();
+
+
+                if(index == 0 && Character.isLetter(character)){
+                    while(character!= 32 && character != 10){
+                        label += (char)character;
+                        character = reader.readChar();
+                        index++;
+                    }
+                    label = label.trim();
+                    token = new Token(new Position(line, column),label,TokenType.Label);
+                    column++;
+                    break;
+                }
+
+
+                if(character == 59){
+                    while(character != 10){ // if first char is a ; then we will read until new line and output a comment
+                        comment += (char)character;
+                        character = reader.readChar();
+                        index++;
                     }
                     comment = comment.trim();
-                    t = new Token(new Position(line, column),comment,TokenType.Comment);
+                    token = new Token(new Position(line, column),comment,TokenType.Comment);
                     column++;
                     break;
                 }
 
-                if(Character.isLetter(pointer)){
-                    while(pointer!= 32){
-                        mnemonic += (char)pointer;
-                        pointer = r1.readChar();
+                if(Character.isLetter(character) && index > 0){
+                    while(character!= 32 && character != 10){
+                        mnemonic += (char)character;
+                        character = reader.readChar();
+                        index++;
                     }
-                    t = new Token(new Position(line, column),mnemonic,TokenType.Mnemonic);
+                    mnemonic = mnemonic.trim();
+                    token = new Token(new Position(line, column),mnemonic,TokenType.Mnemonic);
                     column++;
                     break;
                 }
 
-                if(Character.isDigit(pointer)){
-                    while(pointer!= 32){
-                        operand += (char)pointer;
-                        pointer = r1.readChar();
+                if(Character.isDigit(character)){
+                    while(character!= 32){
+                        operand += (char)character;
+                        character = reader.readChar();
+                        index++;
                     }
-                    t = new Token(new Position(line, column),operand,TokenType.Operand);
+                    token = new Token(new Position(line, column),operand,TokenType.Operand);
                     column++;
                     break;
                 }
 
-                if(pointer == 10){ // end-of-line
-                    t = new Token(new Position(line, column),"EOL",TokenType.EOL);
+                if(character == 10){ // end-of-line
+                    token = new Token(new Position(line, column),"EOL",TokenType.EOL);
                     column = 1;
                     line++;
-                    this.pointer = r1.readChar();
+                    this.character = reader.readChar();
+                    index=0;
                     break;
                 }
-                pointer = r1.readChar();
+                character = reader.readChar();
+                index++;
 
-                if(pointer == -1){
-                    t = new Token(new Position(line, column),"EOF",TokenType.EOF);
+                if(character == -1){
+                    token = new Token(new Position(line, column),"EOF",TokenType.EOF);
                 }
 
-            }while(pointer != -1);
+            }while(character != -1);
 
         }
 
         catch (IOException e){
             e.printStackTrace();
         }
-
-        return t;
+        return token;
     }
 
 
 
-  /*  public static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner s1 = new Scanner();
         System.out.println(s1.scanToken());
         System.out.println(s1.scanToken());
@@ -92,12 +115,14 @@ public class Scanner{
         System.out.println(s1.scanToken());
         System.out.println(s1.scanToken());
         System.out.println(s1.scanToken());
+        System.out.println(s1.scanToken());
+        System.out.println(s1.scanToken());
 
 
 
 
 
-    }*/
+    }
 
 
 
