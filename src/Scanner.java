@@ -106,24 +106,4 @@ public class Scanner{
 
 
 
-    public static void main(String[] args) {
-        Scanner s1 = new Scanner();
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-
-
-
-
-
-    }
-
-
-
 }
