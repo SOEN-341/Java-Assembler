@@ -6,7 +6,7 @@ public class Assembler {
         try{
        //     Reader.readFile(new File("TestInherentMnemonics.asm"));
             InterRep IR = new Parser().generates();
-            new CodeGenerator(IR, new SymbolTable(), new File("TestInherentMnemonics.asm")).generateListing();
+            //new CodeGenerator(IR, new SymbolTable(), new File("TestInherentMnemonics.asm")).generateListing();
 
         }catch(Exception e){
 

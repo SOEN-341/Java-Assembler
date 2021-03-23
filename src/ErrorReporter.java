@@ -1,12 +1,15 @@
 import java.util.ArrayList;
 
-public class ErrorReporter {
-    ArrayList<Error> Errors;
-    public void addError(Error e){
-        this.Errors.add(e);
+public class ErrorReporter  implements IErrorReporter{
+    ArrayList<ErrorMsg> errorMsgs;
+    public ErrorReporter(){
+        this.errorMsgs = new ArrayList<ErrorMsg>();
     }
-    public void printAllErrors(){
-        for(Error e: Errors){
+    public void record(ErrorMsg e){
+        this.errorMsgs.add(e);
+    }
+    public void report(){
+        for(ErrorMsg e: errorMsgs){
             System.out.println(e);
         }
     }

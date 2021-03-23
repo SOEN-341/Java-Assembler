@@ -1,7 +1,7 @@
-public class Error {
+public class ErrorMsg implements IErrorMsg{
     private String message;
     private Position p;
-    public Error(String m, Position p){
+    public ErrorMsg(String m, Position p){
         this.message = m;
         this.p = p;
     }
