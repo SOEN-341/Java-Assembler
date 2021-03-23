@@ -28,7 +28,7 @@ public class Scanner{
         String operand="";
         String label ="";
         ErrorMsg error = null;
-        Token token = new Token(new Position(line, column), "", null);
+        Token token = null;
 
         try {
             do{
@@ -128,30 +128,6 @@ public class Scanner{
 
 
 
- /*   public static void main(String[] args) {
-        Scanner s1 = new Scanner();
-
-       for (int i=0; i <263; i++) {
-            System.out.println();
-        }
-
-
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        System.out.println(s1.scanToken());
-        s1.reporter.report();
-
-
-
-
-
-    } */
 
 
 
