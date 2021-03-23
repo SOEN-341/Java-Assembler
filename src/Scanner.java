@@ -6,12 +6,12 @@ public class Scanner{
     private int column = 1;
     private int character;
     private int index=0;
-    private Token token;
+    private ErrorReporter reporter;
 
 
     public Scanner() {
         reader = new Reader(new File("TestImmediate.asm"));
-        token = new Token(new Position(line, column), "", null);
+        reporter = new ErrorReporter();
 
         try {
             this.character = reader.readChar();
@@ -21,17 +21,19 @@ public class Scanner{
         }
     }
 
+
     public Token scanToken()  {
         String mnemonic = "";
         String comment="";
         String operand="";
         String label ="";
+        ErrorMsg error = null;
+        Token token = new Token(new Position(line, column), "", null);
 
         try {
             do{
-
-
-                if(index == 0 && Character.isLetter(character)){
+                // checking for a label
+                if (index == 0 && Character.isLetter(character)){
                     while(character!= 32 && character != 10){
                         label += (char)character;
                         character = reader.readChar();
@@ -42,21 +44,31 @@ public class Scanner{
                     column++;
                     break;
                 }
-
-
-                if(character == 59){
-                    while(character != 10){ // if first char is a ; then we will read until new line and output a comment
+                // checking for a semicolon to scan a comment
+                if (character == 59){
+                    while(character != 10 && character != -1){
                         comment += (char)character;
                         character = reader.readChar();
                         index++;
                     }
-                    comment = comment.trim();
-                    token = new Token(new Position(line, column),comment,TokenType.Comment);
-                    column++;
-                    break;
+                    if (comment.trim().equals(";")) {
+                        error = new ErrorMsg("Error: eol in string", new Position(line, column));
+                        this.reporter.record(error);
+                        column++;
+                    }
+                    else if (comment.trim().equals(";") && character == -1) {
+                        error = new ErrorMsg("Error: eof in string", new Position(line, column));
+                        this.reporter.record(error);
+                    }
+                    else {
+                        comment = comment.trim();
+                        token = new Token(new Position(line, column),comment,TokenType.Comment);
+                        column++;
+                        break;
+                    }
                 }
-
-                if(Character.isLetter(character) && index > 0){
+                // checking for a mnemonic
+                if (Character.isLetter(character) && index > 0){
                     while(character!= 32 && character != 10){
                         mnemonic += (char)character;
                         character = reader.readChar();
@@ -67,8 +79,8 @@ public class Scanner{
                     column++;
                     break;
                 }
-
-                if(Character.isDigit(character)){
+                // checking for an integer
+                if (Character.isDigit(character)){
                     while(character!= 32){
                         operand += (char)character;
                         character = reader.readChar();
@@ -78,8 +90,16 @@ public class Scanner{
                     column++;
                     break;
                 }
+                // checking for invalid characters.
+                if((character >= 33 && character <= 47) || character == 58 || (character >= 60 && character <= 64)
+                        || (character >= 91 && character <= 96) || (character >= 123 && character <= 126)) {
 
-                if(character == 10){ // end-of-line
+                    error = new ErrorMsg("Invalid character", new Position(line, column));
+                    this.reporter.record(error);
+                    column++;
+                }
+                // end-of-line
+                if (character == 10){
                     token = new Token(new Position(line, column),"EOL",TokenType.EOL);
                     column = 1;
                     line++;
@@ -87,12 +107,14 @@ public class Scanner{
                     index=0;
                     break;
                 }
+                // end-of-file
+                if (character == -1){
+                    token = new Token(new Position(line, column),"EOF",TokenType.EOF);
+                    reader.closeInputStream();
+                }
+
                 character = reader.readChar();
                 index++;
-
-                if(character == -1){
-                    token = new Token(new Position(line, column),"EOF",TokenType.EOF);
-                }
 
             }while(character != -1);
 
@@ -103,6 +125,33 @@ public class Scanner{
         }
         return token;
     }
+
+
+
+ /*   public static void main(String[] args) {
+        Scanner s1 = new Scanner();
+
+       for (int i=0; i <263; i++) {
+            System.out.println();
+        }
+
+
+        System.out.println(s1.scanToken());
+        System.out.println(s1.scanToken());
+        System.out.println(s1.scanToken());
+        System.out.println(s1.scanToken());
+        System.out.println(s1.scanToken());
+        System.out.println(s1.scanToken());
+        System.out.println(s1.scanToken());
+        System.out.println(s1.scanToken());
+        System.out.println(s1.scanToken());
+        s1.reporter.report();
+
+
+
+
+
+    } */
 
 
 
