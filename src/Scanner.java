@@ -38,6 +38,11 @@ public class Scanner{
                         label += (char)character;
                         character = reader.readChar();
                         index++;
+                        if (character == -1) {
+                            error = new ErrorMsg("Error: eof in string", new Position(line, column));
+                            this.reporter.record(error);
+                            break;
+                        }
                     }
                     label = label.trim();
                     token = new Token(new Position(line, column),label,TokenType.Label);
@@ -73,6 +78,11 @@ public class Scanner{
                         mnemonic += (char)character;
                         character = reader.readChar();
                         index++;
+                        if (character == -1) {
+                            error = new ErrorMsg("Error: eof in string", new Position(line, column));
+                            this.reporter.record(error);
+                            break;
+                        }
                     }
                     mnemonic = mnemonic.trim();
                     token = new Token(new Position(line, column),mnemonic,TokenType.Mnemonic);
@@ -85,6 +95,11 @@ public class Scanner{
                         operand += (char)character;
                         character = reader.readChar();
                         index++;
+                        if (character == -1) {
+                            error = new ErrorMsg("Error: eof in string", new Position(line, column));
+                            this.reporter.record(error);
+                            break;
+                        }
                     }
                     token = new Token(new Position(line, column),operand,TokenType.Operand);
                     column++;
@@ -125,8 +140,6 @@ public class Scanner{
         }
         return token;
     }
-
-
 
 
 
