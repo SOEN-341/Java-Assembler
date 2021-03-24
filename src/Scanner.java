@@ -21,7 +21,6 @@ public class Scanner{
         }
     }
 
-
     public Token scanToken()  {
         String mnemonic = "";
         String comment="";
@@ -90,7 +89,7 @@ public class Scanner{
                     break;
                 }
                 // checking for an integer
-                if (Character.isDigit(character)){
+                if (Character.isDigit(character) || character == 45 || character == 43){
                     while(character!= 32){
                         operand += (char)character;
                         character = reader.readChar();
@@ -125,7 +124,8 @@ public class Scanner{
                 // end-of-file
                 if (character == -1){
                     token = new Token(new Position(line, column),"EOF",TokenType.EOF);
-//                    reader.closeInputStream();
+                   reader.closeInputStream();
+                   break;
                 }
 
                 character = reader.readChar();
