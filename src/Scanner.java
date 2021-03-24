@@ -100,6 +100,7 @@ public class Scanner{
                             break;
                         }
                     }
+                    operand = operand.trim();
                     token = new Token(new Position(line, column),operand,TokenType.Operand);
                     column++;
                     break;
