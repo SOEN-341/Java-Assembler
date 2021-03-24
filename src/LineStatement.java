@@ -10,11 +10,6 @@ public class LineStatement implements ILineStatement {
         this.Comments = comments;
     }
 
-    LineStatement(String label,String directive, String comments) {
-        this.label = label;
-        this.directive = directive;
-        this.Comments = comments;
-    }
 
     public Instruction getInstruction() {
         return instruction;

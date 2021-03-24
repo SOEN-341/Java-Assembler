@@ -125,7 +125,7 @@ public class Scanner{
                 // end-of-file
                 if (character == -1){
                     token = new Token(new Position(line, column),"EOF",TokenType.EOF);
-                    reader.closeInputStream();
+//                    reader.closeInputStream();
                 }
 
                 character = reader.readChar();
