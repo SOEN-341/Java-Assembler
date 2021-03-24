@@ -1,7 +1,7 @@
-import java.io.IOException;
-import java.util.ArrayList;
 
 public interface IParser {
-//    ArrayList<String> getMnemonic();
-//    InterRep generates ();
+    InterRep generates ();
+    boolean FindErrors(String Mne, String Operand,Position position);
+    void CreateLS (String Mne, String label, String comment, String Operand);
+    void getToken();
 }
