@@ -8,6 +8,9 @@ public class Scanner{
     private int index=0;
     private ErrorReporter reporter;
 
+    public ErrorReporter getReporter() {
+        return reporter;
+    }
 
     public Scanner() {
         reader = new Reader(new File("TestImmediate.asm"));
@@ -20,6 +23,7 @@ public class Scanner{
             e.printStackTrace();
         }
     }
+
 
     public Token scanToken()  {
         String mnemonic = "";
@@ -89,8 +93,8 @@ public class Scanner{
                     break;
                 }
                 // checking for an integer
-                if (Character.isDigit(character) || character == 45 || character == 43){
-                    while(character!= 32){
+                if (Character.isDigit(character)){
+                    while(character!= 32) {
                         operand += (char)character;
                         character = reader.readChar();
                         index++;
@@ -104,6 +108,28 @@ public class Scanner{
                     token = new Token(new Position(line, column),operand,TokenType.Operand);
                     column++;
                     break;
+                }
+                // checking for a signed number
+                if (character == 45 || character == 43) {
+                    operand += (char)character;
+                    character = reader.readChar();
+                    index++;
+                    while (Character.isDigit(character)) {
+                        operand += (char)character;
+                        character = reader.readChar();
+                        index++;
+                    }
+                    if (operand.trim().equals("-") || operand.trim().equals("+")) {
+                        error = new ErrorMsg("Error: Invalid character", new Position(line, column));
+                        this.reporter.record(error);
+                        column++;
+                    }
+                    else {
+                        operand = operand.trim();
+                        token = new Token(new Position(line, column),operand,TokenType.Operand);
+                        column++;
+                        break;
+                    }
                 }
                 // checking for invalid characters.
                 if((character >= 33 && character <= 47) || character == 58 || (character >= 60 && character <= 64)
@@ -125,8 +151,8 @@ public class Scanner{
                 // end-of-file
                 if (character == -1){
                     token = new Token(new Position(line, column),"EOF",TokenType.EOF);
-                   reader.closeInputStream();
-                   break;
+                    reader.closeInputStream();
+                    break;
                 }
 
                 character = reader.readChar();
@@ -141,7 +167,6 @@ public class Scanner{
         }
         return token;
     }
-
 
 
 
