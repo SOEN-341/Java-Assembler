@@ -10,8 +10,8 @@ public class TestParserGenerates {
                 + ". Third Line [LineStatement{label=, Instruction=[Mnemonic=enter.u5, Operand=1], Comments=OK, number <u5> [0..31].}]");
 
         System.out.print("Intermediate representation: First Line ["+IR.getLS(0)+"]. ");
-        System.out.print("Second Line ["+IR.getLS(1)+"]. ");
-        System.out.print("Third Line ["+IR.getLS(2)+"]");
+        System.out.print("Second Line ["+IR.getLS(2)+"]. ");
+        System.out.print("Third Line ["+IR.getLS(3)+"]");
         System.out.println();
     }
 }

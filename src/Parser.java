@@ -1,16 +1,19 @@
 
 public class Parser implements IParser{
-      private  InterRep IR = new InterRep();
-      private String[] inherent = {"halt","pop","dup","exit","ret","not","and","or","xor","neg","inc","dec","add",
+
+    private  InterRep IR = new InterRep();
+    private ErrorReporter error = new ErrorReporter();
+    private Scanner S;
+
+
+    private String[] inherent = {"halt","pop","dup","exit","ret","not","and","or","xor","neg","inc","dec","add",
               "sub","mul","div","rem","shl","shr", "teq","tne","tlt","tgt","tle","tge"};
 
     private String[] AllMnemonics = {"halt","pop","dup","exit","ret","not","and","or","xor","neg","inc","dec","add",
             "sub","mul","div","rem","shl","shr", "teq","tne","tlt","tgt","tle","tge","addv","br","brf","call","decv",
             "enter","incv","ldc","ldv","ret","stb","trap","stv"};
 
-    private Scanner S;
 
-    ErrorReporter error = new ErrorReporter();
 
     Parser(Scanner s){
         this.S = s;
@@ -83,6 +86,7 @@ public class Parser implements IParser{
                     }
                 }
             }
+
             for (String s : inherent) {
                 if (Mne.equals(s)) {
                     if (!Operand.equals("")) {
