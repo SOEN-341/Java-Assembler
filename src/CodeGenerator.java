@@ -25,8 +25,12 @@ public class CodeGenerator implements ICodeGenerator{
                 foS.write(header.charAt(i));
             }
             foS.write('\n');
-            for(int i = 0; i < this.IR.getSize(); i++){
-                currentLine = lineStatetolst(i, this.IR.getLS(i), Table);
+            for(int i = 0, addr=0; i < this.IR.getSize(); i++,addr++){
+                currentLine = lineStatetolst(i,addr, this.IR.getLS(i), Table);
+                String mnemonic = this.IR.getLS(i).getInstruction().getMnemonic();
+                if(mnemonic == ""){
+                    addr--;
+                }
                 for(int j = 0;j < currentLine.length(); j++){
                     foS.write(currentLine.charAt(j));
                 }
@@ -49,9 +53,9 @@ public class CodeGenerator implements ICodeGenerator{
 
     }
 
-    public String lineStatetolst(int lineNum, LineStatement lS, SymbolTable Table){
+    public String lineStatetolst(int lineNum, int addr, LineStatement lS, SymbolTable Table){
 
-        String hex = Integer.toHexString(lineNum).toUpperCase();
+        String hex = Integer.toHexString(addr).toUpperCase();
 
         String mnemonic = lS.getInstruction().getMnemonic();
         int code = 0;
