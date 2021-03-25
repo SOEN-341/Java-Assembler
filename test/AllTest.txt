@@ -1,9 +1,9 @@
 Test Reader
-h
-h
+;
+;
 Test Scanner
-[[halt(1,1)=Mnemonic]]
-[[halt(1,1)=Mnemonic]]
+[;TestImmediate.asm - Test immediate instructions.(1,1)=Comment]
+[;TestImmediate.asm - Test immediate instructions.(1,1)=Comment]
 Test lineStatetolst
 6    0005 00                          halt
 6    0005 00                          halt
