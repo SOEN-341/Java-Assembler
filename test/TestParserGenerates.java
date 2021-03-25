@@ -1,6 +1,6 @@
 public class TestParserGenerates {
     public static void main(String[] args) {
-        Parser Par = new Parser();
+        Parser Par = new Parser(new Scanner("TestImmediate.asm"));
         InterRep IR= Par.generates();
 
         System.out.println("Test Parser for generates");

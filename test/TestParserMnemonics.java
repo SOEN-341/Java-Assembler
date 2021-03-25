@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class TestParserMnemonics {
     public static void main(String[] args) {
 
-            Parser Par1= new Parser();
+            //Parser Par1= new Parser();
             //ArrayList<String> Mnemonics=Par1.getMnemonic();
 
             //System.out.println("Test Parser for getMnemonics");

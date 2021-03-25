@@ -1,7 +1,7 @@
 import java.io.File;
 public class TestlineStatetolst {
     public static void main(String[] args){
-        InterRep IR = new Parser().generates();
+        InterRep IR = new Parser(new Scanner("TestImmediate.asm")).generates();
         CodeGenerator c = new CodeGenerator(IR, new SymbolTable(), new File("x"));
         //String header = "Line Addr Code          Label         Mne   Operand       Comments";
         System.out.println("Test lineStatetolst");

@@ -8,14 +8,16 @@ public class Parser implements IParser{
             "sub","mul","div","rem","shl","shr", "teq","tne","tlt","tgt","tle","tge","addv","br","brf","call","decv",
             "enter","incv","ldc","ldv","ret","stb","trap","stv"};
 
+    private Scanner S;
+
     ErrorReporter error = new ErrorReporter();
 
-    Parser(){
-
+    Parser(Scanner s){
+        this.S = s;
     }
 
     public void getToken(){
-        Scanner S = new Scanner("TestImmediate.asm");
+        //Scanner S = new Scanner("TestImmediate.asm");
         Token t = S.scanToken();
         String Mne="";
         String label="";
