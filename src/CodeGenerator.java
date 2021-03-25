@@ -50,10 +50,39 @@ public class CodeGenerator implements ICodeGenerator{
     }
 
     public String lineStatetolst(int lineNum, LineStatement lS, SymbolTable Table){
+
         String hex = Integer.toHexString(lineNum).toUpperCase();
-        String opCode = Integer.toHexString(Table.getOpcode(lS.getInstruction().getMnemonic())).toUpperCase();
+
+        String mnemonic = lS.getInstruction().getMnemonic();
+        int code = 0;
+        int number = 0;
+        if(mnemonic != ""){
+            code = Table.getOpcode(mnemonic);
+            number = Integer.parseInt(lS.getInstruction().getOperand());
+        }
+        if(number < 0){
+            number += 8;
+        }
+        if(code == 0x80)
+            code = (number > 15) ? 0x70 : 0x80;
+        code = code | number;
+
+        String opCode = "";
+        if(mnemonic != "")
+            opCode = Integer.toHexString(code).toUpperCase();
+        else
+            opCode = "";
+        String comment = "";
+        if(lS.getComments() != "")
+            comment = ";" +lS.getComments();
+        String label = "";
+        if(lS.getLabel() != "" || mnemonic != "")
+            label = String.format("%1$26s", "");
+        if(mnemonic != "")
+            mnemonic = String.format("%1$-9s" ,lS.getInstruction().getMnemonic())  + String.format("%1$2s", "") + String.format("%1$-2s", lS.getInstruction().getOperand()) ;
+
         return String.format("%1$-4s", lineNum + 1) + " " + String.format("%1$4s", hex).replace(" ", "0") +
-                " " +String.format("%1$2s", opCode).replace(" ", "0") + String.format("%1$26s", "") + lS.getInstruction().getMnemonic();
+                " " +String.format("%1$2s", opCode).replace("", "") + label + mnemonic + String.format("%1$12s", "") + comment;
     }
 
 

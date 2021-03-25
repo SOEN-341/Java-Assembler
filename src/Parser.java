@@ -35,17 +35,14 @@ public class Parser implements IParser{
                 Operand=t.getName();
             }
             if (t.getName().equals("EOL")){
-                if(Mne.equals("")&&label.equals("")&&comment.equals("")&&Operand.equals("")){
+                if(FindErrors(Mne,Operand, positionMNe)) {
+                    CreateLS(Mne, label, comment, Operand);
                 }
-               else {
-                    if(FindErrors(Mne,Operand, positionMNe)) {
-                        CreateLS(Mne, label, comment, Operand);
-                    }
-                    Mne="";
-                    label="";
-                    comment="";
-                    Operand="";
-                }
+                Mne="";
+                label="";
+                comment="";
+                Operand="";
+
             }
             t=S.scanToken();
         }

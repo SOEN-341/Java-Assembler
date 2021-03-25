@@ -29,10 +29,19 @@ public class SymbolTable implements ISymbolTable{
         Table.put("tgt", new Mnemonic("tgt", 0x1D));
         Table.put("tle", new Mnemonic("tle", 0x1E));
         Table.put("tge", new Mnemonic("tge", 0x1F));
+        Table.put("enter.u5", new Mnemonic("enter.u5", 0x80));
+        Table.put("ldc.i3", new Mnemonic("ldc.i3", 0x90));
+        Table.put("addv.u3", new Mnemonic("addv.u3", 0x98));
+        Table.put("ldv.u3", new Mnemonic("ldv.u3", 0xA0));
+        Table.put("stv.u3", new Mnemonic("stv.u3", 0xA8));
+
+
+
 
     }
 
     public int getOpcode(String mnemonic){
+
         return (Table.get(mnemonic)).getOpcode();
     }
 

@@ -6,8 +6,7 @@ public class Assembler {
         try{
 
             InterRep IR = new Parser().generates();
-            System.out.println(IR);
-            //new CodeGenerator(IR, new SymbolTable(), new File("TestInherentMnemonics.asm")).generateListing();
+            new CodeGenerator(IR, new SymbolTable(), new File("TestImmediate.asm")).generateListing();
 
         }catch(Exception e){
 
