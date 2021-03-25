@@ -13,7 +13,7 @@ public class Scanner{
     }
 
     public Scanner(String fileName) {
-        reader = new Reader(new File("fileName"));
+        reader = new Reader(new File(fileName));
         reporter = new ErrorReporter();
 
         try {
