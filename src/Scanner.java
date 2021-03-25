@@ -12,8 +12,8 @@ public class Scanner{
         return reporter;
     }
 
-    public Scanner() {
-        reader = new Reader(new File("TestImmediate.asm"));
+    public Scanner(String fileName) {
+        reader = new Reader(new File("fileName"));
         reporter = new ErrorReporter();
 
         try {

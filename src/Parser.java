@@ -15,7 +15,7 @@ public class Parser implements IParser{
     }
 
     public void getToken(){
-        Scanner S = new Scanner();
+        Scanner S = new Scanner("TestImmediate.asm");
         Token t = S.scanToken();
         String Mne="";
         String label="";
