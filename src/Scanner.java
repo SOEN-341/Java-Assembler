@@ -12,9 +12,9 @@ public class Scanner{
         return reporter;
     }
 
-    public Scanner(String fileName) {
+    public Scanner(String fileName,ErrorReporter reporter) {
         reader = new Reader(new File(fileName));
-        reporter = new ErrorReporter();
+        this.reporter = reporter;
 
         try {
             this.character = reader.readChar();

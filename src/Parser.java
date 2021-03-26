@@ -2,7 +2,7 @@
 public class Parser implements IParser{
 
     private  InterRep IR = new InterRep();
-    private ErrorReporter error = new ErrorReporter();
+    private ErrorReporter error ;
     private Scanner S;
 
 
@@ -17,6 +17,7 @@ public class Parser implements IParser{
 
     Parser(Scanner s){
         this.S = s;
+//        this.error= s.getReporter();
     }
 
     public void getToken(){
@@ -81,7 +82,7 @@ public class Parser implements IParser{
                         break;
                     } else if (!m.equals(AllMnemonics[i]) && i == AllMnemonics.length - 1) {
                         ErrorMsg message = new ErrorMsg("Not a valid mnemonic or directive.", position);
-                        error.record(message);
+                        S.getReporter().record(message);
                         return false;
                     }
                 }
@@ -91,7 +92,7 @@ public class Parser implements IParser{
                 if (Mne.equals(s)) {
                     if (!Operand.equals("")) {
                         ErrorMsg message = new ErrorMsg("An inherent instruction has no operand.", position);
-                        error.record(message);
+                        S.getReporter().record(message);
                         return false;
                     }
                 }
@@ -105,10 +106,10 @@ public class Parser implements IParser{
                     if (Operand.equals("")) {
                         if (value == 3 || value == 5) {
                             ErrorMsg message = new ErrorMsg("An immediate instruction always requires an operand.", position);
-                            error.record(message);
+                            S.getReporter().record(message);
                         } else {
                             ErrorMsg message = new ErrorMsg("A relative instruction always requires an operand.", position);
-                            error.record(message);
+                            S.getReporter().record(message);
                         }
                         return false;
                     } else {
@@ -118,11 +119,11 @@ public class Parser implements IParser{
                             if (value == 3 || value == 5) {
                                 ErrorMsg message = new ErrorMsg("The immediate instruction \'" + Mne + "\' must have a " + value +
                                         "-bit unsigned operand number ranging from 0 to " + max + ".", position);
-                                error.record(message);
+                                S.getReporter().record(message);
                             } else {
                                 ErrorMsg message = new ErrorMsg("The relative instruction \'" + Mne + "\' must have a " + value +
                                         "-bit unsigned operand number ranging from 0 to " + max + ".", position);
-                                error.record(message);
+                                S.getReporter().record(message);
                             }
                             return false;
                         } else {
@@ -132,11 +133,11 @@ public class Parser implements IParser{
                                 if (value == 3 || value == 5) {
                                     ErrorMsg message = new ErrorMsg("The immediate instruction \'" + Mne + "\' must have a " + value +
                                             "-bit signed operand number ranging from " + min + " to " + max + ".", position);
-                                    error.record(message);
+                                    S.getReporter().record(message);
                                 } else {
                                     ErrorMsg message = new ErrorMsg("The relative instruction \'" + Mne + "\' must have a " + value +
                                             "-bit signed operand number ranging from " + min + " to " + max + ".", position);
-                                    error.record(message);
+                                    S.getReporter().record(message);
                                 }
                                 return false;
                             }
@@ -151,7 +152,7 @@ public class Parser implements IParser{
 
     public InterRep generates() {
         getToken();
-        error.report();
+//        error.report();
         return IR;
     }
 
