@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class Reader{
+public class Reader implements IReader{
     // reader will read one char and pass it to scanner to create a token
     private FileInputStream f;
 

@@ -1,11 +1,12 @@
 import java.io.File;
+import java.io.IOException;
 
 public interface IReader {
 
-    public File copy(File f);
+    public File copy(File f)throws IOException;
 
-    public int readChar ();
+    public int readChar ()throws IOException;
 
-    public void closeInputStream();
+    public void closeInputStream()throws IOException;
 
 }

@@ -1,5 +1,3 @@
-import javafx.geometry.Pos;
-import jdk.jfr.Unsigned;
 
 public class Parser implements IParser{
 
