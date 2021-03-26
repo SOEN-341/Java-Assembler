@@ -1,8 +1,9 @@
+import javafx.geometry.Pos;
+import jdk.jfr.Unsigned;
 
 public class Parser implements IParser{
 
     private  InterRep IR = new InterRep();
-    private ErrorReporter error ;
     private Scanner S;
 
 
@@ -17,11 +18,9 @@ public class Parser implements IParser{
 
     Parser(Scanner s){
         this.S = s;
-//        this.error= s.getReporter();
     }
 
     public void getToken(){
-        //Scanner S = new Scanner("TestImmediate.asm");
         Token t = S.scanToken();
         String Mne="";
         String label="";
@@ -70,78 +69,26 @@ public class Parser implements IParser{
 
     public boolean FindErrors(String Mne, String Operand,Position position){
         if (!Mne.equals("")) {
-            String m = "";
             if (!Mne.equals(".cstring")) {
-                if (Mne.contains(".")) {
-                    m = Mne.substring(0, Mne.indexOf("."));
-                } else {
-                    m = Mne;
-                }
-                for (int i = 0; i < AllMnemonics.length; i++) {
-                    if (m.equals(AllMnemonics[i])) {
-                        break;
-                    } else if (!m.equals(AllMnemonics[i]) && i == AllMnemonics.length - 1) {
-                        ErrorMsg message = new ErrorMsg("Not a valid mnemonic or directive.", position);
-                        S.getReporter().record(message);
-                        return false;
-                    }
-                }
+               if (!MnemonicExists(Mne,position)) {
+                   return false;
+               }
             }
 
-            for (String s : inherent) {
-                if (Mne.equals(s)) {
-                    if (!Operand.equals("")) {
-                        ErrorMsg message = new ErrorMsg("An inherent instruction has no operand.", position);
-                        S.getReporter().record(message);
-                        return false;
-                    }
-                }
+            if (!inherentMnemonic(Mne,Operand, position)){
+                return false;
             }
 
             if (Mne.contains(".") && !Mne.equals(".cstring")) {
-                String Opcode = Mne.substring(Mne.indexOf(".") + 1);
-                String sign = Opcode.substring(0, 1);
-                int value = Integer.parseInt(Opcode.substring(1));
-                if (sign.equals("u") || sign.equals("i")) {
-                    if (Operand.equals("")) {
-                        if (value == 3 || value == 5) {
-                            ErrorMsg message = new ErrorMsg("An immediate instruction always requires an operand.", position);
-                            S.getReporter().record(message);
-                        } else {
-                            ErrorMsg message = new ErrorMsg("A relative instruction always requires an operand.", position);
-                            S.getReporter().record(message);
-                        }
-                        return false;
-                    } else {
-                        int Op = Integer.parseInt(Operand);
-                        double max = Math.pow(2, value) - 1;
-                        if (sign.equals("u") && (Op < 0 || Op > max)) {
-                            if (value == 3 || value == 5) {
-                                ErrorMsg message = new ErrorMsg("The immediate instruction \'" + Mne + "\' must have a " + value +
-                                        "-bit unsigned operand number ranging from 0 to " + max + ".", position);
-                                S.getReporter().record(message);
-                            } else {
-                                ErrorMsg message = new ErrorMsg("The relative instruction \'" + Mne + "\' must have a " + value +
-                                        "-bit unsigned operand number ranging from 0 to " + max + ".", position);
-                                S.getReporter().record(message);
-                            }
+               if (!NoOperandFound(Mne, Operand,position)){
+                   return false;
+                    }
+               else {
+                        if(!UnsignedRange( Mne,  Operand,  position)){
                             return false;
                         } else {
-                            double min = -1 * Math.pow(2, (value - 1));
-                            max = Math.pow(2, value - 1) - 1;
-                            if (sign.equals("i") && (Op < min || Op > max)) {
-                                if (value == 3 || value == 5) {
-                                    ErrorMsg message = new ErrorMsg("The immediate instruction \'" + Mne + "\' must have a " + value +
-                                            "-bit signed operand number ranging from " + min + " to " + max + ".", position);
-                                    S.getReporter().record(message);
-                                } else {
-                                    ErrorMsg message = new ErrorMsg("The relative instruction \'" + Mne + "\' must have a " + value +
-                                            "-bit signed operand number ranging from " + min + " to " + max + ".", position);
-                                    S.getReporter().record(message);
-                                }
+                            if(!signedRange( Mne,  Operand,  position)){
                                 return false;
-                            }
-
                         }
                     }
                 }
@@ -150,9 +97,105 @@ public class Parser implements IParser{
         return true;
     }
 
-    public InterRep generates() {
+    public boolean MnemonicExists(String Mne, Position position){
+        String m="";
+        if (Mne.contains(".")) {
+            m = Mne.substring(0, Mne.indexOf("."));
+        } else {
+            m = Mne;
+        }
+        for (int i = 0; i < AllMnemonics.length; i++) {
+            if (m.equals(AllMnemonics[i])) {
+                break;
+            } else if (!m.equals(AllMnemonics[i]) && i == AllMnemonics.length - 1) {
+                ErrorMsg message = new ErrorMsg("Not a valid mnemonic or directive.", position);
+                S.getReporter().record(message);
+                return false;
+            }
+        }
+        return  true;
+    }
+
+    public boolean inherentMnemonic(String Mne, String Operand, Position position){
+
+        for (String s : inherent) {
+            if (Mne.equals(s)) {
+                if (!Operand.equals("")) {
+                    ErrorMsg message = new ErrorMsg("An inherent instruction has no operand.", position);
+                    S.getReporter().record(message);
+                    return false;
+                }
+            }
+        }
+        return  true;
+    }
+
+    public boolean NoOperandFound(String Mne, String Operand, Position position){
+        String Opcode = Mne.substring(Mne.indexOf(".") + 1);
+        String sign = Opcode.substring(0, 1);
+        int value = Integer.parseInt(Opcode.substring(1));
+        if (sign.equals("u") || sign.equals("i")) {
+            if (Operand.equals("")) {
+                if (value == 3 || value == 5) {
+                    ErrorMsg message = new ErrorMsg("An immediate instruction always requires an operand.", position);
+                    S.getReporter().record(message);
+                } else {
+                    ErrorMsg message = new ErrorMsg("A relative instruction always requires an operand.", position);
+                    S.getReporter().record(message);
+                }
+                return false;
+            }
+        }
+        return  true;
+    }
+
+    public boolean UnsignedRange(String Mne, String Operand, Position position) {
+        String Opcode = Mne.substring(Mne.indexOf(".") + 1);
+        String sign = Opcode.substring(0, 1);
+        int value = Integer.parseInt(Opcode.substring(1));
+        int Op = Integer.parseInt(Operand);
+        double max = Math.pow(2, value) - 1;
+        if (sign.equals("u") && (Op < 0 || Op > max)) {
+            if (value == 3 || value == 5) {
+                ErrorMsg message = new ErrorMsg("The immediate instruction \'" + Mne + "\' must have a " + value +
+                        "-bit unsigned operand number ranging from 0 to " +(int) max + ".", position);
+                S.getReporter().record(message);
+            } else {
+                ErrorMsg message = new ErrorMsg("The relative instruction \'" + Mne + "\' must have a " + value +
+                        "-bit unsigned operand number ranging from 0 to " + (int) max + ".", position);
+                S.getReporter().record(message);
+            }
+            return false;
+        }
+    return  true;
+    }
+
+
+    public boolean signedRange(String Mne, String Operand, Position position) {
+        String Opcode = Mne.substring(Mne.indexOf(".") + 1);
+        String sign = Opcode.substring(0, 1);
+        int value = Integer.parseInt(Opcode.substring(1));
+        int Op = Integer.parseInt(Operand);
+        double min = -1 * Math.pow(2, (value - 1));
+        double max = Math.pow(2, value - 1) - 1;
+        if (sign.equals("i") && (Op < min || Op > max)) {
+            if (value == 3 || value == 5) {
+                ErrorMsg message = new ErrorMsg("The immediate instruction \'" + Mne + "\' must have a " + value +
+                        "-bit signed operand number ranging from " + (int)min + " to " + (int)max + ".", position);
+                S.getReporter().record(message);
+            } else {
+                ErrorMsg message = new ErrorMsg("The relative instruction \'" + Mne + "\' must have a " + value +
+                        "-bit signed operand number ranging from " + (int)min + " to " + (int)max + ".", position);
+                S.getReporter().record(message);
+            }
+            return false;
+        }
+    return  true;
+    }
+
+
+        public InterRep generates() {
         getToken();
-//        error.report();
         return IR;
     }
 
