@@ -80,10 +80,10 @@ public class CodeGenerator implements ICodeGenerator{
         if(lS.getComments() != "")
             comment = ";" +lS.getComments();
         String label = "";
-        if(lS.getLabel() != "" || mnemonic != "")
-            label = String.format("%1$26s", "");
-        if(mnemonic != "")
-            mnemonic = String.format("%1$-9s" ,lS.getInstruction().getMnemonic())  + String.format("%1$2s", "") + String.format("%1$-2s", lS.getInstruction().getOperand()) ;
+        //if(lS.getLabel() != "" || mnemonic != "")
+        label = String.format("%1$26s", "");
+        //if(mnemonic != "")
+        mnemonic = String.format("%1$-9s" ,lS.getInstruction().getMnemonic())  + String.format("%1$2s", "") + String.format("%1$-2s", lS.getInstruction().getOperand()) ;
 
         return String.format("%1$-4s", lineNum + 1) + " " + String.format("%1$4s", hex).replace(" ", "0") +
                 " " +String.format("%1$2s", opCode).replace("", "") + label + mnemonic + String.format("%1$12s", "") + comment;
