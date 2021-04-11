@@ -7,14 +7,16 @@ public class Scanner{
     private int character;
     private int index=0;
     private ErrorReporter reporter;
+    private SymbolTable symbolTable;
 
     public ErrorReporter getReporter() {
         return reporter;
     }
 
-    public Scanner(String fileName,ErrorReporter reporter) {
+    public Scanner(String fileName,ErrorReporter reporter,SymbolTable symbolTable) {
         reader = new Reader(new File(fileName));
         this.reporter = reporter;
+        this.symbolTable = symbolTable;
 
         try {
             this.character = reader.readChar();
