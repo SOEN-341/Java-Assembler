@@ -2,14 +2,19 @@ import java.util.ArrayList;
 
 public class Validate implements IValidate {
 
-    public boolean validate(ArrayList<String> args) {
+    public boolean validate(String[] arg) {
 
-        for (String arg: args){
-            if(arg.equals("-h") || arg.equals("-help") || arg.equals("-v") || arg.equals("-verbose")
-                    || arg.equals("-b") || arg.equals("-banner") || arg.equals("-l") || arg.equals("-listing") || arg.contains(".asm")){
+        ArrayList<String> args = new ArrayList<>();
+        for(int i = 0; i < arg.length; i++){
+            args.add(arg[i]);
+        }
+
+        for (String ar: args){
+            if(ar.equals("-h") || ar.equals("-help") || ar.equals("-v") || ar.equals("-verbose")
+                    || ar.equals("-b") || ar.equals("-banner") || ar.equals("-l") || ar.equals("-listing") || ar.contains(".asm")){
 
             }else{
-                System.out.println(arg + "is an unknown option");
+                System.out.println( ar + " is an unknown input");
                 return false;
             }
         }
