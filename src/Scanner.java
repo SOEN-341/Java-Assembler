@@ -14,6 +14,7 @@ public class Scanner{
     }
     public SymbolTable getSymbolTable(){return symbolTable;}
 
+
     public Scanner(String fileName,ErrorReporter reporter,SymbolTable symbolTable) {
         reader = new Reader(new File(fileName));
         this.reporter = reporter;

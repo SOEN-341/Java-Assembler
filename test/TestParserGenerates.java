@@ -16,4 +16,5 @@ public class TestParserGenerates {
         System.out.print("Third Line ["+IR.getLS(3)+"]");
         System.out.println();
     }
+
 }

@@ -42,6 +42,7 @@ public class SymbolTable implements ISymbolTable{
 
 
 
+
     }
     public int size(){
         return Table.size();
