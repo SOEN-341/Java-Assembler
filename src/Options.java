@@ -12,7 +12,7 @@ public class Options implements IOptions {
                     setHelp(true);
                     break;
                 case "-v":
-                case "verbose":
+                case "-verbose":
                     setVerbose(true);
                     break;
                 case "-b":
