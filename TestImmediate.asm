@@ -1,6 +1,6 @@
 ; TestImmediate.asm - Test immediate instructions.
 
-          enter.u5  0        ; OK, number <u5> [0..31].           
+          enter.u5  0       ; OK, number <u5> [0..31].
           enter.u5  1        ; OK, number <u5> [0..31].           
           enter.u5  2        ; OK, number <u5> [0..31].           
           enter.u5  3        ; OK, number <u5> [0..31].           
@@ -33,7 +33,7 @@
           enter.u5  30       ; OK, number <u5> [0..31].           
           enter.u5  31       ; OK, number <u5> [0..31].           
 
-            ldc.i3  0        ; OK, number <i3> [-4..3]. 
+            ldc.i3  0        ; OK, number <i3> [-4..3].
             ldc.i3  1        ; OK, number <i3> [-4..3]. 
             ldc.i3  2        ; OK, number <i3> [-4..3]. 
             ldc.i3  3        ; OK, number <i3> [-4..3]. 

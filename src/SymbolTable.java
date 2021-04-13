@@ -1,4 +1,8 @@
+import javafx.scene.control.Tab;
+
 import java.util.Hashtable;
+import java.util.Set;
+
 public class SymbolTable implements ISymbolTable{
     private Hashtable<String, Mnemonic> Table;
     // This is going to be the hardcode for the 25 mne
@@ -39,12 +43,17 @@ public class SymbolTable implements ISymbolTable{
 
 
     }
+    public int size(){
+        return Table.size();
+    }
+//    public Set getKeys(){
+//        Set<String> keys = Table.keySet();
+//        return keys;
+//    }
 
     public int getOpcode(String mnemonic){
-
         return (Table.get(mnemonic)).getOpcode();
     }
-
 
 }
 

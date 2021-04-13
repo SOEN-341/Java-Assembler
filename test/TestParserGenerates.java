@@ -1,7 +1,8 @@
 public class TestParserGenerates {
     public static void main(String[] args) {
         ErrorReporter reporter= new ErrorReporter();
-        Parser Par = new Parser(new Scanner("TestImmediate.asm",reporter));
+        SymbolTable table= new SymbolTable();
+        Parser Par = new Parser(new Scanner("TestImmediate.asm",reporter,table));
         InterRep IR= Par.generates();
 
         System.out.println("Test Parser for generates");

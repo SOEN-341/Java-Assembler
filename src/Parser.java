@@ -1,8 +1,11 @@
+import java.util.ArrayList;
+import java.util.Set;
 
 public class Parser implements IParser{
 
     private  InterRep IR = new InterRep();
     private Scanner S;
+
 
 
     private String[] inherent = {"halt","pop","dup","exit","ret","not","and","or","xor","neg","inc","dec","add",
@@ -11,8 +14,9 @@ public class Parser implements IParser{
     private String[] AllMnemonics = {"halt","pop","dup","exit","ret","not","and","or","xor","neg","inc","dec","add",
             "sub","mul","div","rem","shl","shr", "teq","tne","tlt","tgt","tle","tge","addv","br","brf","call","decv",
             "enter","incv","ldc","ldv","ret","stb","trap","stv"};
+    private String[] relative={"br","lda","brf","ldc","ldv","stv","addv", "incv", "decv","enter","call","trap"};
 
-
+    private ArrayList<String> labelList= new ArrayList<>();
 
     Parser(Scanner s){
         this.S = s;
@@ -25,6 +29,7 @@ public class Parser implements IParser{
         String comment="";
         String Operand="";
         Position positionMNe = null;
+        Position positionLabel = null;
 
         while(!t.getName().equals("EOF")){
             if (t.getCode().toString().equals("Mnemonic")){
@@ -32,13 +37,15 @@ public class Parser implements IParser{
                 positionMNe = t.getPosition();
             }else if(t.getCode().toString().equals("Label")){
                 label=t.getName();
-                }else if (t.getCode().toString().equals("Comment")){
+                positionLabel = t.getPosition();
+            }else if (t.getCode().toString().equals("Comment")){
                 comment=t.getName().substring(2);
             }else if (t.getCode().toString().equals("Operand")){
                 Operand=t.getName();
             }
             if (t.getName().equals("EOL")){
-                if(FindErrors(Mne,Operand, positionMNe)) {
+                if(FindMnemonicErrors(Mne,Operand, positionMNe) && FindLabelErrors(label,positionLabel )) {
+                    labelList.add(label);
                     CreateLS(Mne, label, comment, Operand);
                 }
                 Mne="";
@@ -65,28 +72,46 @@ public class Parser implements IParser{
     }
 
 
-    public boolean FindErrors(String Mne, String Operand,Position position){
+   private boolean FindLabelErrors(String label,Position position ) {
+        for(int i=0; i<labelList.size(); i++) {
+            if(labelList.get(i).equals(label)) {
+                ErrorMsg message = new ErrorMsg(label+" label already defined", position);
+                S.getReporter().record(message);
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    private boolean FindMnemonicErrors(String Mne, String Operand,Position position){
         if (!Mne.equals("")) {
+            // checks if the mnemonic exists
             if (!Mne.equals(".cstring")) {
                if (!MnemonicExists(Mne,position)) {
                    return false;
                }
             }
-
+            // checks if it inherent mnemonic
             if (!inherentMnemonic(Mne,Operand, position)){
                 return false;
             }
 
             if (Mne.contains(".") && !Mne.equals(".cstring")) {
-               if (!NoOperandFound(Mne, Operand,position)){
-                   return false;
-                    }
-               else {
-                        if(!UnsignedRange( Mne,  Operand,  position)){
+                int last = Integer.parseInt(Mne.substring(Mne.length() - 1));
+                if (last > 5) {
+                        relativeInstruction(Mne, Operand, position);
+                } else {
+                    //check for immediate instructions
+                    if (!NoOperandFound(Mne, Operand, position)) {
+                        return false;
+                    } else {
+                        if (!UnsignedRange(Mne, Operand, position)) {
                             return false;
                         } else {
-                            if(!signedRange( Mne,  Operand,  position)){
+                            if (!signedRange(Mne, Operand, position)) {
                                 return false;
+                            }
                         }
                     }
                 }
@@ -95,7 +120,7 @@ public class Parser implements IParser{
         return true;
     }
 
-    public boolean MnemonicExists(String Mne, Position position){
+    private boolean MnemonicExists(String Mne, Position position){
         String m="";
         if (Mne.contains(".")) {
             m = Mne.substring(0, Mne.indexOf("."));
@@ -114,7 +139,7 @@ public class Parser implements IParser{
         return  true;
     }
 
-    public boolean inherentMnemonic(String Mne, String Operand, Position position){
+    private boolean inherentMnemonic(String Mne, String Operand, Position position){
 
         for (String s : inherent) {
             if (Mne.equals(s)) {
@@ -128,7 +153,7 @@ public class Parser implements IParser{
         return  true;
     }
 
-    public boolean NoOperandFound(String Mne, String Operand, Position position){
+    private boolean NoOperandFound(String Mne, String Operand, Position position){
         String Opcode = Mne.substring(Mne.indexOf(".") + 1);
         String sign = Opcode.substring(0, 1);
         int value = Integer.parseInt(Opcode.substring(1));
@@ -147,7 +172,7 @@ public class Parser implements IParser{
         return  true;
     }
 
-    public boolean UnsignedRange(String Mne, String Operand, Position position) {
+    private boolean UnsignedRange(String Mne, String Operand, Position position) {
         String Opcode = Mne.substring(Mne.indexOf(".") + 1);
         String sign = Opcode.substring(0, 1);
         int value = Integer.parseInt(Opcode.substring(1));
@@ -169,7 +194,7 @@ public class Parser implements IParser{
     }
 
 
-    public boolean signedRange(String Mne, String Operand, Position position) {
+    private boolean signedRange(String Mne, String Operand, Position position) {
         String Opcode = Mne.substring(Mne.indexOf(".") + 1);
         String sign = Opcode.substring(0, 1);
         int value = Integer.parseInt(Opcode.substring(1));
@@ -191,6 +216,52 @@ public class Parser implements IParser{
     return  true;
     }
 
+
+    private boolean relativeInstruction (String Mne, String Operand, Position position){
+        String Mnemonic = Mne.substring(0, Mne.indexOf("."));
+        int count=0;
+        for (int i=0; i<relative.length; i++){
+            if (relative[i].equals(Mnemonic)){
+                break;
+            }
+            count++;
+        }
+        if ( count ==relative.length){
+            ErrorMsg message = new ErrorMsg("relative instruction is not found", position);
+            S.getReporter().record(message);
+            return false;
+        }
+        if (Mnemonic.equals("lda") || Mnemonic.equals("br") || Mnemonic.equals("brf")){
+            try{
+                int op = Integer.parseInt(Operand);
+                ErrorMsg message = new ErrorMsg("Operand must refer to a label", position);
+                S.getReporter().record(message);
+                return false;
+
+            }catch (NumberFormatException e){ }
+//              ***************** check if the operand exist as label
+
+
+
+//            int length=S.getSymbolTable().size();
+//            Set<String> keys = S.getSymbolTable().getKeys();
+//            for( String key : keys){
+//                if (Operand.equals(key)){
+//
+//               }
+//            }
+
+        }else{
+            if (!UnsignedRange(Mne, Operand, position)) {
+                return false;
+            } else {
+                if (!signedRange(Mne, Operand, position)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
         public InterRep generates() {
         getToken();
