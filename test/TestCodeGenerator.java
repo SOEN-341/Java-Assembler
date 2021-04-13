@@ -9,7 +9,7 @@ public class TestCodeGenerator {
         System.out.println(new CodeGenerator(null, new SymbolTable(), new File("TestInherentMnemonics.asm")).lineStatetolst(5,5, new LineStatement(null, "halt",null, null),new SymbolTable()));
         System.out.println("Test generateLst");
         ErrorReporter reporter=new ErrorReporter();
-        InterRep IR = new Parser(new Scanner("TestImmediate.asm",reporter)).generates();
+        InterRep IR = new Parser(new Scanner("TestImmediate.asm",reporter, new SymbolTable())).generates();
 
         new CodeGenerator(IR, new SymbolTable(), new File("copiedTestInherentMnemonics.asm")).generateListing();
 
