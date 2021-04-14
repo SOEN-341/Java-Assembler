@@ -39,7 +39,6 @@ public class Scanner{
                     ch = reader.readChar();
                 }
                 symbolTable.add(label);
-               System.out.println(symbolTable.getLabel(label));
             }
          else{
              while (ch != 10) { ch = reader.readChar();
@@ -192,16 +191,6 @@ public class Scanner{
             e.printStackTrace();
         }
         return token;
-    }
-
-
-    public static void main(String[] args) {
-        ErrorReporter errorReporter = new ErrorReporter();
-        SymbolTable symbolTable = new SymbolTable();
-        String filename = "TestImmediate.asm";
-        Scanner sc1 = new Scanner(filename,errorReporter,symbolTable);
-        sc1.getSymbolTable().getLabel("ali");
-
     }
 
 
