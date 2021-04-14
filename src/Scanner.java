@@ -22,12 +22,34 @@ public class Scanner{
 
         try {
             this.character = reader.readChar();
+            this.addLabel(character,symbolTable);
+
         }
         catch (IOException e) {
             e.printStackTrace();
         }
     }
+    public void addLabel(int ch, SymbolTable symbolTable) throws IOException{
 
+        while (ch != -1) {
+         String label="";
+         if(Character.isLetter(ch)) {
+                while (ch != 32 && ch != 10) {
+                  label += (char) ch;
+                    ch = reader.readChar();
+                }
+                symbolTable.add(label);
+               System.out.println(symbolTable.getLabel(label));
+            }
+         else{
+             while (ch != 10) { ch = reader.readChar();
+             }
+         }
+            ch = reader.readChar();
+        }
+        reader.closeInputStream();
+        reader.openInputStream();
+    }
 
     public Token scanToken()  {
         String mnemonic = "";
@@ -172,6 +194,15 @@ public class Scanner{
         return token;
     }
 
+
+    public static void main(String[] args) {
+        ErrorReporter errorReporter = new ErrorReporter();
+        SymbolTable symbolTable = new SymbolTable();
+        String filename = "TestImmediate.asm";
+        Scanner sc1 = new Scanner(filename,errorReporter,symbolTable);
+        sc1.getSymbolTable().getLabel("ali");
+
+    }
 
 
 

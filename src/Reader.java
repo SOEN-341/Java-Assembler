@@ -3,11 +3,12 @@ import java.io.*;
 public class Reader implements IReader{
     // reader will read one char and pass it to scanner to create a token
     private FileInputStream f;
+    private File copied;
 
     public Reader(File file) {
 
         try{
-            File copied =  copy(file);
+            copied =  copy(file);
             f = new FileInputStream(copied);
         }
         catch(IOException e){
@@ -52,6 +53,9 @@ public class Reader implements IReader{
 
     public void closeInputStream() throws IOException{
         f.close();
+    }
+    public void openInputStream() throws IOException{
+        f = new FileInputStream(copied);
     }
 }
 

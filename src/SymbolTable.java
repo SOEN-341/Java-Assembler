@@ -37,11 +37,6 @@ public class SymbolTable implements ISymbolTable{
         Table.put("addv.u3", new Mnemonic("addv.u3", 0x98));
         Table.put("ldv.u3", new Mnemonic("ldv.u3", 0xA0));
         Table.put("stv.u3", new Mnemonic("stv.u3", 0xA8));
-
-
-
-
-
     }
     public int size(){
         return Table.size();
@@ -54,7 +49,14 @@ public class SymbolTable implements ISymbolTable{
     public int getOpcode(String mnemonic){
         return (Table.get(mnemonic)).getOpcode();
     }
+    public String getLabel(String label){
+        return(Table.get(label)).getName();
+    }
 
+    public void add(String label){
+
+        Table.put(label, new Mnemonic(label,0x00));
+    }
 }
 
 
