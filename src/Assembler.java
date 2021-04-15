@@ -13,10 +13,11 @@ public class Assembler {
             if(v.validate(args) && options.getBanner()){
                 System.out.println();
             }
-            if(v.validate(args) && !options.getHelp() && !options.getBanner()){
+            if(true && !options.getHelp() && !options.getBanner()){
                 SymbolTable symbolTable = new SymbolTable();
                 ErrorReporter reporter = new ErrorReporter();
                 InterRep IR = new Parser(new Scanner("TestImmediate.asm", reporter, symbolTable)).generates();
+                System.out.println(IR);
                 new CodeGenerator(IR, symbolTable, new File("TestImmediate.asm")).generateListing();
                 reporter.report();
             }
