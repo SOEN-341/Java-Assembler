@@ -49,8 +49,11 @@ public class SymbolTable implements ISymbolTable{
     public int getOpcode(String mnemonic){
         return (Table.get(mnemonic)).getOpcode();
     }
-    public String getLabel(String label){
-        return(Table.get(label)).getName();
+    public boolean getLabel(String label){
+        if(Table.get(label)==null){
+            return false;
+        }
+        return true;
     }
 
     public void add(String label){

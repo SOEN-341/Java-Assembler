@@ -63,7 +63,7 @@ public class Parser implements IParser{
         String directive = "";
         LineStatement Line = null;
         if (Mne.contains(".cstring")){
-            directive="CString";
+            directive=".cstring";
              Line = new LineStatement(label, directive,Operand,comment );
         } else{
              Line = new LineStatement(label, Mne,Operand,comment );
@@ -73,11 +73,13 @@ public class Parser implements IParser{
 
 
    private boolean FindLabelErrors(String label,Position position ) {
-        for(int i=0; i<labelList.size(); i++) {
-            if(labelList.get(i).equals(label)) {
-                ErrorMsg message = new ErrorMsg(label+" label already defined", position);
-                S.getReporter().record(message);
-                return false;
+        if(!label.equals("")) {
+            for (int i = 0; i < labelList.size(); i++) {
+                if (labelList.get(i).equals(label)) {
+                    ErrorMsg message = new ErrorMsg(label + " label already defined", position);
+                    S.getReporter().record(message);
+                    return false;
+                }
             }
         }
         return true;
@@ -92,20 +94,25 @@ public class Parser implements IParser{
                    return false;
                }
             }
-            // checks if it inherent mnemonic
+            // checks to see that there is no value in the operand for the inherent mnemonic
             if (!inherentMnemonic(Mne,Operand, position)){
                 return false;
             }
-
+            // error check for immediate and relative instructions
             if (Mne.contains(".") && !Mne.equals(".cstring")) {
-                int last = Integer.parseInt(Mne.substring(Mne.length() - 1));
-                if (last > 5) {
-                        relativeInstruction(Mne, Operand, position);
+                int byteSize = Integer.parseInt(Mne.substring(Mne.length() - 1));
+                //checks for relative instructions
+                if (byteSize > 5) {
+                        if(!relativeInstruction(Mne, Operand, position)){
+                            return false;
+                        }
                 } else {
-                    //check for immediate instructions
+                    //checks for immediate instructions
+                    // checks if there is no operand value for immediate instructions
                     if (!NoOperandFound(Mne, Operand, position)) {
                         return false;
                     } else {
+                        // checks the operand values range for unsigned and signed addressing modes
                         if (!UnsignedRange(Mne, Operand, position)) {
                             return false;
                         } else {
@@ -127,14 +134,16 @@ public class Parser implements IParser{
         } else {
             m = Mne;
         }
-        for (int i = 0; i < AllMnemonics.length; i++) {
+        int i=0;
+        for (; i < AllMnemonics.length; i++) {
             if (m.equals(AllMnemonics[i])) {
                 break;
-            } else if (!m.equals(AllMnemonics[i]) && i == AllMnemonics.length - 1) {
-                ErrorMsg message = new ErrorMsg("Not a valid mnemonic or directive.", position);
-                S.getReporter().record(message);
-                return false;
             }
+        }
+        if ( i == AllMnemonics.length) {
+            ErrorMsg message = new ErrorMsg("Not a valid mnemonic or directive.", position);
+            S.getReporter().record(message);
+            return false;
         }
         return  true;
     }
@@ -176,7 +185,14 @@ public class Parser implements IParser{
         String Opcode = Mne.substring(Mne.indexOf(".") + 1);
         String sign = Opcode.substring(0, 1);
         int value = Integer.parseInt(Opcode.substring(1));
-        int Op = Integer.parseInt(Operand);
+        int Op =0;
+        try {
+             Op = Integer.parseInt(Operand);
+        }catch (Exception e){
+            ErrorMsg message = new ErrorMsg("Operand is not an integer", position);
+            S.getReporter().record(message);
+            return false;
+        }
         double max = Math.pow(2, value) - 1;
         if (sign.equals("u") && (Op < 0 || Op > max)) {
             if (value == 3 || value == 5) {
@@ -198,7 +214,14 @@ public class Parser implements IParser{
         String Opcode = Mne.substring(Mne.indexOf(".") + 1);
         String sign = Opcode.substring(0, 1);
         int value = Integer.parseInt(Opcode.substring(1));
-        int Op = Integer.parseInt(Operand);
+        int Op = 0;
+        try {
+            Op = Integer.parseInt(Operand);
+        }catch (Exception e){
+            ErrorMsg message = new ErrorMsg("Operand is not an integer", position);
+            S.getReporter().record(message);
+            return false;
+        }
         double min = -1 * Math.pow(2, (value - 1));
         double max = Math.pow(2, value - 1) - 1;
         if (sign.equals("i") && (Op < min || Op > max)) {
@@ -241,16 +264,11 @@ public class Parser implements IParser{
             }catch (NumberFormatException e){ }
 //              ***************** check if the operand exist as label
 
-
-
-
-//            int length=S.getSymbolTable().size();
-//            Set<String> keys = S.getSymbolTable().getKeys();
-//            for( String key : keys){
-//                if (Operand.equals(key)){
-//
-//               }
-//            }
+                if(S.getSymbolTable().getLabel(Operand)==false){
+                    ErrorMsg message = new ErrorMsg(Operand+ " label not found (or defined).", position);
+                    S.getReporter().record(message);
+                    return false;
+                }
 
         }else{
             if (!UnsignedRange(Mne, Operand, position)) {

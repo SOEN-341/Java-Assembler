@@ -21,7 +21,6 @@ public class Assembler {
                 reporter.report();
             }
         }catch(Exception e){
-
         }
 
     }
