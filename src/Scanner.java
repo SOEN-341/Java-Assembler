@@ -22,12 +22,33 @@ public class Scanner{
 
         try {
             this.character = reader.readChar();
+            this.addLabel(character,symbolTable);
+
         }
         catch (IOException e) {
             e.printStackTrace();
         }
     }
+    public void addLabel(int ch, SymbolTable symbolTable) throws IOException{
 
+        while (ch != -1) {
+         String label="";
+         if(Character.isLetter(ch)) {
+                while (ch != 32 && ch != 10) {
+                  label += (char) ch;
+                    ch = reader.readChar();
+                }
+                symbolTable.add(label);
+            }
+         else{
+             while (ch != 10) { ch = reader.readChar();
+             }
+         }
+            ch = reader.readChar();
+        }
+        reader.closeInputStream();
+        reader.openInputStream();
+    }
 
     public Token scanToken()  {
         String mnemonic = "";
@@ -171,7 +192,6 @@ public class Scanner{
         }
         return token;
     }
-
 
 
 
