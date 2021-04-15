@@ -120,6 +120,41 @@ public class SymbolTable implements ISymbolTable{
             Table.put("ldv.u3", new Mnemonic("ldv.u3", 0xA0));
         if(mne.equals("ldv.u3"))
             Table.put("stv.u3", new Mnemonic("stv.u3", 0xA8));
+        if(mne.equals("addv.u8"))
+            Table.put("addv.u8", new Mnemonic("addv.u8", 0xB0));
+        if(mne.equals("ldv.u8"))
+            Table.put("ldv.u8", new Mnemonic("ldv.u8", 0xB1));
+        if(mne.equals("stv.u8"))
+            Table.put("stv.u8", new Mnemonic("stv.u8", 0xB2));
+        if(mne.equals("incv.u8"))
+            Table.put("incv.u8", new Mnemonic("incv.u8", 0xB3));
+        if(mne.equals("decv.u8"))
+            Table.put("decv.u8", new Mnemonic("decv.u8", 0xB4));
+        if(mne.equals("enter.u8"))
+            Table.put("enter.u8", new Mnemonic("enter.u8", 0xBF));
+        if(mne.equals("lda.i16"))
+            Table.put("lda.i16", new Mnemonic("lda.i16", 0xD5));
+        if(mne.equals("ldc.i8"))
+            Table.put("ldc.i8", new Mnemonic("ldc.i8", 0xD9));
+        if(mne.equals("ldc.i16"))
+            Table.put("ldc.i16", new Mnemonic("ldc.i16", 0xDA));
+        if(mne.equals("ldc.i32"))
+            Table.put("ldc.i32", new Mnemonic("ldc.i32", 0xDB));
+        if(mne.equals("br.i8"))
+            Table.put("br.i8", new Mnemonic("br.i8", 0xE0));
+        if(mne.equals("br.i16"))
+            Table.put("br.i16", new Mnemonic("br.i16", 0xE1));
+        if(mne.equals("brf.i8"))
+            Table.put("brf.i8", new Mnemonic("brf.i8", 0xE3));
+        if(mne.equals("call.i16"))
+            Table.put("call.i16", new Mnemonic("call.i16", 0xE7));
+        if(mne.equals("trap"))
+            Table.put("trap", new Mnemonic("trap", 0xFF));
+
+
+
+
+
 
 
     }
