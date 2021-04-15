@@ -102,6 +102,39 @@ public class Scanner{
                 }
                 // checking for a mnemonic
                 if (Character.isLetter(character) && index > 0){
+                    if(column == 2){
+                        while(character!= 32) {
+                            operand += (char)character;
+                            character = reader.readChar();
+                            index++;
+                            if (character == -1) {
+                                error = new ErrorMsg("Error: eof in string", new Position(line, column));
+                                this.reporter.record(error);
+                                break;
+                            }
+                        }
+                        operand = operand.trim();
+                        token = new Token(new Position(line, column),operand,TokenType.Operand);
+                        column++;
+                        break;
+                    }
+                    while(character!= 32 && character != 10){
+                        mnemonic += (char)character;
+                        character = reader.readChar();
+                        index++;
+                        if (character == -1) {
+                            error = new ErrorMsg("Error: eof in string", new Position(line, column));
+                            this.reporter.record(error);
+                            break;
+                        }
+                    }
+                    mnemonic = mnemonic.trim();
+                    token = new Token(new Position(line, column),mnemonic,TokenType.Mnemonic);
+                    column++;
+                    break;
+                }
+                // Mnemoic .cstring
+                if(character == 46){
                     while(character!= 32 && character != 10){
                         mnemonic += (char)character;
                         character = reader.readChar();
@@ -156,6 +189,23 @@ public class Scanner{
                         break;
                     }
                 }
+                if(character ==34 && column==2){
+                    while(character!= 32) {
+                        operand += (char)character;
+                        character = reader.readChar();
+                        index++;
+                        if (character == -1) {
+                            error = new ErrorMsg("Error: eof in string", new Position(line, column));
+                            this.reporter.record(error);
+                            break;
+                        }
+                    }
+                    operand = operand.trim();
+                    token = new Token(new Position(line, column),operand,TokenType.Operand);
+                    column++;
+                    break;
+
+                }
                 // checking for invalid characters.
                 if((character >= 33 && character <= 47) || character == 58 || (character >= 60 && character <= 64)
                         || (character >= 91 && character <= 96) || (character >= 123 && character <= 126)) {
@@ -193,6 +243,20 @@ public class Scanner{
         return token;
     }
 
+    public static void main(String[] args) {
+        ErrorReporter errorReporter = new ErrorReporter();
+        SymbolTable symbolTable = new SymbolTable();
+        Scanner sc1 = new  Scanner("TestImmediate.asm",errorReporter,symbolTable);
+        System.out.println(sc1.scanToken());
+        System.out.println(sc1.scanToken());
+        System.out.println(sc1.scanToken());
+        System.out.println(sc1.scanToken());
+        System.out.println(sc1.scanToken());
+        System.out.println(sc1.scanToken());
+
+
+
+    }
 
 
 }
