@@ -5,6 +5,7 @@ public class Assembler {
     public static void main(String[] args) {
         try{
             Validate v = new Validate();
+            boolean validated = v.validate(args);
             Options options = new Options(args);
             if(v.validate(args) && options.getHelp()){
                 System.out.println();

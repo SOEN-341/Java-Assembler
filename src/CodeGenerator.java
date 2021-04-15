@@ -25,8 +25,11 @@ public class CodeGenerator implements ICodeGenerator{
                 foS.write(header.charAt(i));
             }
             foS.write('\n');
+
+
             for(int i = 0, addr=0; i < this.IR.getSize(); i++,addr++){
                 currentLine = lineStatetolst(i,addr, this.IR.getLS(i), Table);
+
                 String mnemonic = this.IR.getLS(i).getInstruction().getMnemonic();
                 if(mnemonic == ""){
                     addr--;
@@ -50,6 +53,20 @@ public class CodeGenerator implements ICodeGenerator{
 
     }
     public void generateExecutable(){
+        FileOutputStream foS = null;
+        try{
+            foS = new FileOutputStream(new File(this.f.getName().replace(".asm", ".txt").replace("copied", "")));
+            for(int i = 0; i < this.IR.getSize(); i++){
+                String code = Integer.toHexString(generateCode_num(this.IR.getLS(i))).toUpperCase() + " ";
+                for(int j = 0;j < code.length(); j++){
+                    foS.write(code.charAt(j));
+                }
+            }
+            foS.close();
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+
 
     }
 
@@ -58,18 +75,8 @@ public class CodeGenerator implements ICodeGenerator{
         String hex = Integer.toHexString(addr).toUpperCase();
 
         String mnemonic = lS.getInstruction().getMnemonic();
-        int code = 0;
-        int number = 0;
-        if(mnemonic != ""){
-            code = Table.getOpcode(mnemonic);
-            number = Integer.parseInt(lS.getInstruction().getOperand());
-        }
-        if(number < 0){
-            number += 8;
-        }
-        if(code == 0x80)
-            code = (number > 15) ? 0x70 : 0x80;
-        code = code | number;
+
+        int code = generateCode_num(lS);
 
         String opCode = "";
         if(mnemonic != "")
@@ -77,7 +84,7 @@ public class CodeGenerator implements ICodeGenerator{
         else
             opCode = "";
         String comment = "";
-        if(lS.getComments() != "")
+        if(lS.getComments() != "" && lS.getComments() != null)
             comment = ";" +lS.getComments();
         String label = "";
         //if(lS.getLabel() != "" || mnemonic != "")
@@ -89,5 +96,27 @@ public class CodeGenerator implements ICodeGenerator{
                 " " +String.format("%1$2s", opCode).replace("", "") + label + mnemonic + String.format("%1$12s", "") + comment;
     }
 
+    public int generateCode_num(LineStatement lS){
+        String mnemonic = lS.getInstruction().getMnemonic();
+        int code = 0;
+        int number = 0;
+        if(mnemonic != ""){
+            code = Table.getOpcode(mnemonic);
+            number = Integer.parseInt(lS.getInstruction().getOperand());
+        }
+        //
+        if(number < 0){
+            number += 8;
+        }
+        if(code == 0x80)
+            code = (number > 15) ? 0x70 : 0x80;
+        code = code | number;
+
+        return code;
+    }
+
 
 }
+
+// code = resolvedCode(number, code)[0];
+// number = resolvedCode(number, code)[1];
