@@ -126,14 +126,14 @@ public class SymbolTable implements ISymbolTable{
         if(mne.equals(".cstring"))
             Table.put(".cstring",new Mnemonic(".cstring",0x00));
 
-
-
-
-
-
-
     }
 
+    @Override
+    public String toString() {
+        return "SymbolTable{" +
+                "Table=" + Table +
+                '}';
+    }
 }
 
 

@@ -25,7 +25,8 @@ public class CodeGenerator implements ICodeGenerator{
             }
             foS.write('\n');
 
-
+            this.firstPass();
+            //System.out.println(this.Table);
             for(int i = 0, addr=0; i < this.IR.getSize(); i++,addr+=2){
                 currentLine = RelativeString(i,addr, this.IR.getLS(i));
 
@@ -55,12 +56,22 @@ public class CodeGenerator implements ICodeGenerator{
         FileOutputStream foS = null;
         try{
             foS = new FileOutputStream(new File(this.f.getName().replace(".asm", ".txt").replace("copied", "")));
-            for(int i = 0; i < this.IR.getSize(); i++){
-                String code = Integer.toHexString(generateImediateCode(this.IR.getLS(i))).toUpperCase() + " ";
+            this.firstPass();
+            System.out.println(this.Table);
+            for(int i = 0, addr=0; i < this.IR.getSize(); i++,addr+=2){
+                String mnemonic = this.IR.getLS(i).getInstruction().getMnemonic();
+                if(mnemonic == ""){
+                    addr-=2;
+                }
+
+                String code = generateRelativeCode(addr ,this.IR.getLS(i)).toUpperCase() + " ";
+                code = code.replace("\n", "");
+
                 for(int j = 0;j < code.length(); j++){
                     foS.write(code.charAt(j));
                 }
             }
+
             foS.close();
         }catch(IOException e){
             System.out.println(e.getMessage());
@@ -101,6 +112,7 @@ public class CodeGenerator implements ICodeGenerator{
             if(mnemonic == ""){
                 addr-=2;
             }
+            System.out.println(mnemonic + "X" + this.IR.getLS(i).getLabel());
             if(this.IR.getLS(i).getLabel() != "" || this.IR.getLS(i).getLabel() != null){
                 this.Table.addlabel(this.IR.getLS(i).getLabel(), addr);
             }
@@ -120,7 +132,7 @@ public class CodeGenerator implements ICodeGenerator{
             label = lS.getLabel();
         }
         String comment = "";
-        if(lS.getLabel() != null){
+        if(lS.getComments() != null && lS.getComments() != ""){
             comment = ";"+lS.getComments();
         }
         return String.format("%1$4s", lineNum).replace(' ', '0') +" " +String.format("%1$4s", addr).replace(' ', '0')
@@ -160,7 +172,7 @@ public class CodeGenerator implements ICodeGenerator{
             offset = new Helper().offset255(addr, Table.getOpcode(lS.getInstruction().getOperand()));
             MachineCode += (" " + String.format("%1$2s" ,Integer.toHexString(offset)).replace(' ', '0')).toUpperCase();
 
-        }else if(lS.getInstruction().getMnemonic().equals("ldv.u8") || lS.getInstruction().getMnemonic().equals("stv.u8")){
+        }else if(lS.getInstruction().getMnemonic().equals("ldv.u8") || lS.getInstruction().getMnemonic().equals("stv.u8") || lS.getInstruction().getMnemonic().equals("ldc.i8")){
             MachineCode += ( " " + String.format("%1$2s" ,Integer.toHexString(Integer.parseInt(lS.getInstruction().getOperand()))).replace(' ', '0')).toUpperCase();
 
         }else if(lS.getInstruction().getMnemonic().equals(".cstring")){

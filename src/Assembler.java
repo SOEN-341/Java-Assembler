@@ -5,7 +5,7 @@ public class Assembler {
     public static void main(String[] args) {
         try{
             if(args.length == 0){
-                String[] temp = {"rela03.asm"};
+                String[] temp = {"rela01.asm"};
                 args = temp;
             }
             Validate v = new Validate();
@@ -22,7 +22,9 @@ public class Assembler {
                 ErrorReporter reporter = new ErrorReporter();
                 InterRep IR = new Parser(new Scanner(args[args.length - 1], reporter, symbolTable)).generates();
                 System.out.println(IR);
-                new CodeGenerator(IR, symbolTable, new File(args[args.length - 1])).generateListing();
+                CodeGenerator cG  = new CodeGenerator(IR, symbolTable, new File(args[args.length - 1]));
+                cG.generateListing();
+                cG.generateExecutable();
                 reporter.report();
             }
         }catch(Exception e){
