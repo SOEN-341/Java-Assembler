@@ -27,7 +27,7 @@ public class CodeGenerator implements ICodeGenerator{
 
 
             for(int i = 0, addr=0; i < this.IR.getSize(); i++,addr++){
-                currentLine = lineStatetolst(i,addr, this.IR.getLS(i), Table);
+                currentLine = ImmediateString(i,addr, this.IR.getLS(i), Table);
 
                 String mnemonic = this.IR.getLS(i).getInstruction().getMnemonic();
                 if(mnemonic == ""){
@@ -69,7 +69,7 @@ public class CodeGenerator implements ICodeGenerator{
 
     }
 
-    public String lineStatetolst(int lineNum, int addr, LineStatement lS, SymbolTable Table){
+    public String ImmediateString(int lineNum, int addr, LineStatement lS, SymbolTable Table){
 
         String hex = Integer.toHexString(addr).toUpperCase();
 
