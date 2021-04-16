@@ -5,25 +5,26 @@ public class Assembler {
     public static void main(String[] args) {
         try{
             if(args.length == 0){
-                String[] temp = {"rela01.asm"};
+                String[] temp = {"-l","rela01.asm"};
                 args = temp;
             }
             Validate v = new Validate();
             boolean validated = v.validate(args);
             Options options = new Options(args);
             if(validated && options.getHelp()){
-                System.out.println("this is the help");
+                System.out.println("Usage: cma [ Options ] <file>.asm");
             }
             if(validated && options.getBanner()){
-                System.out.println("this is the banner");
+                System.out.println("Cm Cross-Assembler Version 1.4 - Developed by Team 11.");
             }
             if(validated && !options.getHelp() && !options.getBanner()){
                 SymbolTable symbolTable = new SymbolTable();
                 ErrorReporter reporter = new ErrorReporter();
                 InterRep IR = new Parser(new Scanner(args[args.length - 1], reporter, symbolTable)).generates();
-                System.out.println(IR);
+                //System.out.println(IR);
                 CodeGenerator cG  = new CodeGenerator(IR, symbolTable, new File(args[args.length - 1]));
-                cG.generateListing();
+                if(options.getListing())
+                    cG.generateListing();
                 cG.generateExecutable();
                 reporter.report();
             }

@@ -17,7 +17,7 @@ public class SymbolTable implements ISymbolTable{
 //    }
 
     public int getOpcode(String mnemonic){
-        System.out.println(mnemonic);
+        //System.out.println(mnemonic);
         return (Table.get(mnemonic)).getOpcode();
     }
 

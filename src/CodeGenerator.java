@@ -57,7 +57,7 @@ public class CodeGenerator implements ICodeGenerator{
         try{
             foS = new FileOutputStream(new File(this.f.getName().replace(".asm", ".txt").replace("copied", "")));
             this.firstPass();
-            System.out.println(this.Table);
+            //System.out.println(this.Table);
             for(int i = 0, addr=0; i < this.IR.getSize(); i++,addr+=2){
                 String mnemonic = this.IR.getLS(i).getInstruction().getMnemonic();
                 if(mnemonic == ""){
@@ -112,7 +112,7 @@ public class CodeGenerator implements ICodeGenerator{
             if(mnemonic == ""){
                 addr-=2;
             }
-            System.out.println(mnemonic + "X" + this.IR.getLS(i).getLabel());
+            //System.out.println(mnemonic + "X" + this.IR.getLS(i).getLabel());
             if(this.IR.getLS(i).getLabel() != "" || this.IR.getLS(i).getLabel() != null){
                 this.Table.addlabel(this.IR.getLS(i).getLabel(), addr);
             }

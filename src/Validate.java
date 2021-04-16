@@ -4,13 +4,13 @@ import java.util.ArrayList;
 public class Validate implements IValidate {
 
     public boolean validate(String[] arg) {
-        System.out.println("validating");
+        //System.out.println("validating");
         // args from array to ArrayList
         ArrayList<String> args = new ArrayList<>();
         for(int i = 0; i < arg.length; i++){
             args.add(arg[i]);
         }
-        System.out.println(args);
+        //System.out.println(args);
         //check for valide input (option or asm file)
         for (String ar: args){
             if(ar.equals("-h") || ar.equals("-help") || ar.equals("-v") || ar.equals("-verbose")
