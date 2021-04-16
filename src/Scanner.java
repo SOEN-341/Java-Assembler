@@ -148,6 +148,7 @@ public class Scanner{
                         }
                     }
                     mnemonic = mnemonic.trim();
+                    symbolTable.addMnemonic(mnemonic);
                     token = new Token(new Position(line, column),mnemonic,TokenType.Mnemonic);
                     column++;
                     break;
@@ -165,6 +166,7 @@ public class Scanner{
                         }
                     }
                     mnemonic = mnemonic.trim();
+                    symbolTable.addMnemonic(mnemonic);
                     token = new Token(new Position(line, column),mnemonic,TokenType.Mnemonic);
                     column++;
                     break;
@@ -213,7 +215,7 @@ public class Scanner{
 
                 if(character == 34){
                     if(column == 2 &&labelCheck == false) {
-                        while (character != 32 && character == 10) {
+                        while (character != 32 && character != 10) {
                             operand += (char) character;
                             character = reader.readChar();
                             index++;
@@ -229,7 +231,7 @@ public class Scanner{
                         break;
                     }
                     if(column == 3 &&labelCheck == true){
-                        while (character != 32 && character == 10) {
+                        while (character != 32 && character != 10) {
                             operand += (char) character;
                             character = reader.readChar();
                             index++;
@@ -287,7 +289,7 @@ public class Scanner{
     public static void main(String[] args) {
         ErrorReporter errorReporter = new ErrorReporter();
         SymbolTable symbolTable = new SymbolTable();
-        Scanner sc1 = new  Scanner("rela02.asm",errorReporter,symbolTable);
+        Scanner sc1 = new  Scanner("rela01.asm",errorReporter,symbolTable);
         System.out.println(sc1.scanToken());
         System.out.println(sc1.scanToken());
         System.out.println(sc1.scanToken());
