@@ -8,7 +8,7 @@ public class Scanner{
     private int index=0;
     private ErrorReporter reporter;
     private SymbolTable symbolTable;
-
+    private boolean labelCheck = false;
     public ErrorReporter getReporter() {
         return reporter;
     }
@@ -32,18 +32,18 @@ public class Scanner{
     public void addLabel(int ch, SymbolTable symbolTable) throws IOException{
 
         while (ch != -1) {
-         String label="";
-         if(Character.isLetter(ch)) {
+            String label="";
+            if(Character.isLetter(ch)) {
                 while (ch != 32 && ch != 10) {
-                  label += (char) ch;
+                    label += (char) ch;
                     ch = reader.readChar();
                 }
                 symbolTable.addlabel(label, 0);
             }
-         else{
-             while (ch != 10) { ch = reader.readChar();
-             }
-         }
+            else{
+                while (ch != 10) { ch = reader.readChar();
+                }
+            }
             ch = reader.readChar();
         }
         reader.closeInputStream();
@@ -57,6 +57,7 @@ public class Scanner{
         String label ="";
         ErrorMsg error = null;
         Token token = null;
+
 
         try {
             do{
@@ -75,6 +76,7 @@ public class Scanner{
                     label = label.trim();
                     token = new Token(new Position(line, column),label,TokenType.Label);
                     column++;
+                    labelCheck = true;
                     break;
                 }
                 // checking for a semicolon to scan a comment
@@ -102,14 +104,31 @@ public class Scanner{
                 }
                 // checking for a mnemonic
                 if (Character.isLetter(character) && index > 0){
-                    if(column == 2){
-                        while(character!= 32) {
+                    if(column == 2 && labelCheck == false) {
+                        while(character!= 32 && character != 10) {
                             operand += (char)character;
                             character = reader.readChar();
                             index++;
                             if (character == -1) {
                                 error = new ErrorMsg("Error: eof in string", new Position(line, column));
                                 this.reporter.record(error);
+                                break;
+                            }
+                        }
+                        operand = operand.trim();
+                        token = new Token(new Position(line, column),operand,TokenType.Operand);
+                        column++;
+                        break;
+                    }
+                    if(column == 3 && labelCheck == true) {
+                        while(character!= 32 && character != 10) {
+                            operand += (char)character;
+                            character = reader.readChar();
+                            index++;
+                            if (character == -1) {
+                                error = new ErrorMsg("Error: eof in string", new Position(line, column));
+                                this.reporter.record(error);
+                                labelCheck =false;
                                 break;
                             }
                         }
@@ -150,9 +169,10 @@ public class Scanner{
                     column++;
                     break;
                 }
+
                 // checking for an integer
                 if (Character.isDigit(character)){
-                    while(character!= 32) {
+                    while(character!= 32 && character != 10) {
                         operand += (char)character;
                         character = reader.readChar();
                         index++;
@@ -164,6 +184,7 @@ public class Scanner{
                     }
                     operand = operand.trim();
                     token = new Token(new Position(line, column),operand,TokenType.Operand);
+                    // System.out.println(character);
                     column++;
                     break;
                 }
@@ -189,22 +210,41 @@ public class Scanner{
                         break;
                     }
                 }
-                if(character ==34 && column==2){
-                    while(character!= 32) {
-                        operand += (char)character;
-                        character = reader.readChar();
-                        index++;
-                        if (character == -1) {
-                            error = new ErrorMsg("Error: eof in string", new Position(line, column));
-                            this.reporter.record(error);
-                            break;
-                        }
-                    }
-                    operand = operand.trim();
-                    token = new Token(new Position(line, column),operand,TokenType.Operand);
-                    column++;
-                    break;
 
+                if(character == 34){
+                    if(column == 2 &&labelCheck == false) {
+                        while (character != 32 && character == 10) {
+                            operand += (char) character;
+                            character = reader.readChar();
+                            index++;
+                            if (character == -1) {
+                                error = new ErrorMsg("Error: eof in string", new Position(line, column));
+                                this.reporter.record(error);
+                                break;
+                            }
+                        }
+                        operand = operand.trim();
+                        token = new Token(new Position(line, column), operand, TokenType.Operand);
+                        column++;
+                        break;
+                    }
+                    if(column == 3 &&labelCheck == true){
+                        while (character != 32 && character == 10) {
+                            operand += (char) character;
+                            character = reader.readChar();
+                            index++;
+                            if (character == -1) {
+                                error = new ErrorMsg("Error: eof in string", new Position(line, column));
+                                this.reporter.record(error);
+                                labelCheck = false;
+                                break;
+                            }
+                        }
+                        operand = operand.trim();
+                        token = new Token(new Position(line, column), operand, TokenType.Operand);
+                        column++;
+                        break;
+                    }
                 }
                 // checking for invalid characters.
                 if((character >= 33 && character <= 47) || character == 58 || (character >= 60 && character <= 64)
@@ -221,6 +261,7 @@ public class Scanner{
                     line++;
                     this.character = reader.readChar();
                     index=0;
+                    labelCheck = false;
                     break;
                 }
                 // end-of-file
@@ -246,14 +287,23 @@ public class Scanner{
     public static void main(String[] args) {
         ErrorReporter errorReporter = new ErrorReporter();
         SymbolTable symbolTable = new SymbolTable();
-        Scanner sc1 = new  Scanner("TestImmediate.asm",errorReporter,symbolTable);
+        Scanner sc1 = new  Scanner("rela02.asm",errorReporter,symbolTable);
         System.out.println(sc1.scanToken());
         System.out.println(sc1.scanToken());
         System.out.println(sc1.scanToken());
         System.out.println(sc1.scanToken());
         System.out.println(sc1.scanToken());
         System.out.println(sc1.scanToken());
-
+        System.out.println(sc1.scanToken());
+        System.out.println(sc1.scanToken());
+        System.out.println(sc1.scanToken());
+        System.out.println(sc1.scanToken());
+        System.out.println(sc1.scanToken());
+        System.out.println(sc1.scanToken());
+        System.out.println(sc1.scanToken());
+        System.out.println(sc1.scanToken());
+        System.out.println(sc1.scanToken());
+        System.out.println(sc1.scanToken());
 
 
     }

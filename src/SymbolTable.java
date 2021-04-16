@@ -49,6 +49,7 @@ public class SymbolTable implements ISymbolTable{
     public int getOpcode(String mnemonic){
         return (Table.get(mnemonic)).getOpcode();
     }
+
     public boolean getLabel(String label){
         if(Table.get(label)==null){
             return false;
@@ -59,6 +60,7 @@ public class SymbolTable implements ISymbolTable{
     public void addlabel(String label, int opcode){
         Table.put(label, new Mnemonic(label,opcode));
     }
+
     public void addMnemonic(String mne){
         if(mne.equals("halt"))
             Table.put("halt", new Mnemonic("halt", 0x00));
