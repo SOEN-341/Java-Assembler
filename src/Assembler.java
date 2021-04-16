@@ -26,7 +26,8 @@ public class Assembler {
                 reporter.report();
             }
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            //System.out.println(e.getMessage());
         }
 
     }

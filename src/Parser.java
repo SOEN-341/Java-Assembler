@@ -63,8 +63,7 @@ public class Parser implements IParser{
         String directive = "";
         LineStatement Line = null;
         if (Mne.contains(".cstring")){
-            directive=".cstring";
-             Line = new LineStatement(label, directive,Operand,comment );
+             Line = new LineStatement(label, ".cstring",Operand,comment );
         } else{
              Line = new LineStatement(label, Mne,Operand,comment );
         }
