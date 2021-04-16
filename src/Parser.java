@@ -44,7 +44,7 @@ public class Parser implements IParser{
                 Operand=t.getName();
             }
             if (t.getName().equals("EOL")){
-                if(FindMnemonicErrors(Mne,Operand, positionMNe) && FindLabelErrors(label,positionLabel )) {
+                if((FindMnemonicErrors(Mne,Operand, positionMNe) && FindLabelErrors(label,positionLabel ))) {
                     labelList.add(label);
                     CreateLS(Mne, label, comment, Operand);
                 }
@@ -59,7 +59,7 @@ public class Parser implements IParser{
     }
 
 
-    public void CreateLS (String Mne, String label, String comment, String Operand) {
+    public void CreateLS (String Mne, String label, String comment, String Operand){
         String directive = "";
         LineStatement Line = null;
         if (Mne.contains(".cstring")){
@@ -89,9 +89,9 @@ public class Parser implements IParser{
         if (!Mne.equals("")) {
             // checks if the mnemonic exists
             if (!Mne.equals(".cstring")) {
-               if (!MnemonicExists(Mne,position)) {
-                   return false;
-               }
+//               if (!MnemonicExists(Mne,position)) {
+//                   return false;
+//               }
             }
             // checks to see that there is no value in the operand for the inherent mnemonic
             if (!inherentMnemonic(Mne,Operand, position)){

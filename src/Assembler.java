@@ -5,7 +5,7 @@ public class Assembler {
     public static void main(String[] args) {
         try{
             if(args.length == 0){
-                String[] temp = {"rela01.asm"};
+                String[] temp = {"rela03.asm"};
                 args = temp;
             }
             Validate v = new Validate();
