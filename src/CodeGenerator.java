@@ -1,7 +1,6 @@
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.File;
-import java.util.Locale;
 
 // receive
 public class CodeGenerator implements ICodeGenerator{
@@ -57,7 +56,7 @@ public class CodeGenerator implements ICodeGenerator{
         try{
             foS = new FileOutputStream(new File(this.f.getName().replace(".asm", ".txt").replace("copied", "")));
             for(int i = 0; i < this.IR.getSize(); i++){
-                String code = Integer.toHexString(generateCode_num(this.IR.getLS(i))).toUpperCase() + " ";
+                String code = Integer.toHexString(generateImediateCode(this.IR.getLS(i))).toUpperCase() + " ";
                 for(int j = 0;j < code.length(); j++){
                     foS.write(code.charAt(j));
                 }
@@ -76,7 +75,7 @@ public class CodeGenerator implements ICodeGenerator{
 
         String mnemonic = lS.getInstruction().getMnemonic();
 
-        int code = generateCode_num(lS);
+        int code = generateImediateCode(lS);
 
         String opCode = "";
         if(mnemonic != "")
@@ -90,7 +89,7 @@ public class CodeGenerator implements ICodeGenerator{
         //if(lS.getLabel() != "" || mnemonic != "")
         label = String.format("%1$26s", "");
         //if(mnemonic != "")
-        mnemonic = String.format("%1$-9s" ,lS.getInstruction().getMnemonic())  + String.format("%1$2s", "") + String.format("%1$-2s", lS.getInstruction().getOperand()) ;
+        mnemonic = String.format("%1$-9s" ,lS.getInstruction().getMnemonic())  + String.format("%1$2s", "") + String.format("%1$-2s", lS.getInstruction().getOperand());
 
         return String.format("%1$-4s", lineNum + 1) + " " + String.format("%1$4s", hex).replace(" ", "0") +
                 " " +String.format("%1$2s", opCode).replace("", "") + label + mnemonic + String.format("%1$12s", "") + comment;
@@ -108,6 +107,42 @@ public class CodeGenerator implements ICodeGenerator{
         }
     }
     public String RelativeString(int lineNum, int addr, LineStatement lS){
+
+        String MachineCode = generateRelativeCode(addr,lS);
+
+        String operand = lS.getInstruction().getOperand();
+        if(lS.getInstruction().getMnemonic().equals(".cstring")){
+            operand = "\"" + operand + "\"";
+        }
+        String label = "";
+        if(lS.getLabel() != null){
+            label = lS.getLabel();
+        }
+        return String.format("%1$4s", lineNum).replace(' ', '0') +" " +String.format("%1$4s", addr).replace(' ', '0')
+                + " " + String.format("%1$-12s", MachineCode) + "  " + String.format("%1$-14s", label) +
+                String.format("%1$-10s", lS.getInstruction().getMnemonic()) + String.format("%1$4s", operand) +
+                String.format("%1$15s" , lS.getComments());
+    }
+
+    public int generateImediateCode(LineStatement lS){
+        String mnemonic = lS.getInstruction().getMnemonic();
+        int code = 0;
+        int number = 0;
+        if(mnemonic != ""){
+            code = Table.getOpcode(mnemonic);
+            number = Integer.parseInt(lS.getInstruction().getOperand());
+        }
+        //
+        if(number < 0){
+            number += 8;
+        }
+        if(code == 0x80)
+            code = (number > 15) ? 0x70 : 0x80;
+        code = code | number;
+
+        return code;
+    }
+    public String generateRelativeCode(int addr, LineStatement lS){
         int opcode = -1;
 
         if(lS.getInstruction().getMnemonic() != null && lS.getInstruction().getMnemonic() != ".cstring")
@@ -129,39 +164,9 @@ public class CodeGenerator implements ICodeGenerator{
                 MachineCode += (String.format("%1$2s" ,Integer.toHexString(s.charAt(i))).replace(' ', '0') +" ").toUpperCase();
             }
             MachineCode += "00";
+        }
 
-        }
-        String operand = lS.getInstruction().getOperand();
-        if(lS.getInstruction().getMnemonic().equals(".cstring")){
-            operand = "\"" + operand + "\"";
-        }
-        String label = "";
-        if(lS.getLabel() != null){
-            label = lS.getLabel();
-        }
-        return String.format("%1$4s", lineNum).replace(' ', '0') +" " +String.format("%1$4s", addr).replace(' ', '0')
-                + " " + String.format("%1$-12s", MachineCode) + "  " + String.format("%1$-14s", label) +
-                String.format("%1$-10s", lS.getInstruction().getMnemonic()) + String.format("%1$4s", operand) +
-                String.format("%1$15s" , lS.getComments());
-    }
-
-    public int generateCode_num(LineStatement lS){
-        String mnemonic = lS.getInstruction().getMnemonic();
-        int code = 0;
-        int number = 0;
-        if(mnemonic != ""){
-            code = Table.getOpcode(mnemonic);
-            number = Integer.parseInt(lS.getInstruction().getOperand());
-        }
-        //
-        if(number < 0){
-            number += 8;
-        }
-        if(code == 0x80)
-            code = (number > 15) ? 0x70 : 0x80;
-        code = code | number;
-
-        return code;
+        return MachineCode;
     }
 }
 
