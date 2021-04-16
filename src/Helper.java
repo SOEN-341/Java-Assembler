@@ -39,6 +39,15 @@ public class Helper {
         return Relative.contains(mne);
     }
 
+    public int offset255(int i, int j){
+        int temp = j - i;
+        if(temp < 0){
+            temp = 256 + temp;
+        }
+
+        return temp;
+    }
+
 
 
 }

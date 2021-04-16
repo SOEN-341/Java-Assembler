@@ -57,7 +57,7 @@ public class SymbolTable implements ISymbolTable{
     }
 
     public void addlabel(String label, int opcode){
-        Table.put(label, new Mnemonic(label,0x00));
+        Table.put(label, new Mnemonic(label,opcode));
     }
     public void addMnemonic(String mne){
         if(mne.equals("halt"))

@@ -95,6 +95,26 @@ public class CodeGenerator implements ICodeGenerator{
         return String.format("%1$-4s", lineNum + 1) + " " + String.format("%1$4s", hex).replace(" ", "0") +
                 " " +String.format("%1$2s", opCode).replace("", "") + label + mnemonic + String.format("%1$12s", "") + comment;
     }
+    public String RelativeString(int lineNum, int addr, LineStatement lS){
+        int opcode = -1;
+
+        if(lS.getInstruction().getMnemonic() != null)
+            opcode = Table.getOpcode(lS.getInstruction().getMnemonic());
+
+        String MachineCode = "";
+        int offset = -1;
+        if(lS.getInstruction().getMnemonic().equals("br.i8")){
+            offset = new Helper().offset255(addr, Table.getOpcode(lS.getInstruction().getOperand()));
+            MachineCode = (Integer.toHexString(opcode) + " " + String.format("%1$2s" ,Integer.toHexString(offset)).replace(' ', '0')).toUpperCase();
+        }
+
+
+
+        return String.format("%1$4s", lineNum).replace(' ', '0') +" " +String.format("%1$4s", addr).replace(' ', '0')
+                + " " + String.format("%1$-12s", MachineCode) + "  " + String.format("%1$-14s", lS.getLabel()) +
+                String.format("%1$-10s", lS.getInstruction().getMnemonic()) + String.format("%1$4s", lS.getInstruction().getOperand()) +
+                String.format("%1$15s" , lS.getComments());
+    }
 
     public int generateCode_num(LineStatement lS){
         String mnemonic = lS.getInstruction().getMnemonic();

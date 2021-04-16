@@ -5,13 +5,20 @@ import java.io.IOException;
 public class TestCodeGenerator {
     public static void main(String[] args) throws IOException{
         System.out.println("Test lineStatetolst");
-        System.out.println("6    0005 00                          halt");
+        System.out.println("Line Addr Machine Code  Label         Assembly Code        Comments  ");
 
 
-        System.out.println(new CodeGenerator(null, new SymbolTable(), new File("TestInherentMnemonics.asm")).lineStatetolst(5,5, new LineStatement(null, "exit","0", null),new SymbolTable()));
-        System.out.println("Test generateLst");
+        //System.out.println(new CodeGenerator(null, new SymbolTable(), new File("TestInherentMnemonics.asm")).lineStatetolst(5,5, new LineStatement(null, "exit","0", null),new SymbolTable()));
+        //System.out.println("Test generateLst");
+        InterRep IR = new InterRep();
+        IR.add(new LineStatement("End", "br.i8", "End", ";testing"));
+        SymbolTable sT = new SymbolTable();
+        sT.addlabel("End", 6);
+        sT.addMnemonic("br.i8");
 
+        CodeGenerator cG = new CodeGenerator(IR, sT, null);
 
+        System.out.println(cG.RelativeString(4, 6, IR.getLS(0)));
 
 
 
