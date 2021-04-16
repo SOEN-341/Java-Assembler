@@ -95,24 +95,53 @@ public class CodeGenerator implements ICodeGenerator{
         return String.format("%1$-4s", lineNum + 1) + " " + String.format("%1$4s", hex).replace(" ", "0") +
                 " " +String.format("%1$2s", opCode).replace("", "") + label + mnemonic + String.format("%1$12s", "") + comment;
     }
+
+    public void firstPass(){
+        for(int i = 0, addr=0; i < this.IR.getSize(); i++,addr+=2){
+            String mnemonic = this.IR.getLS(i).getInstruction().getMnemonic();
+            if(mnemonic == ""){
+                addr-=2;
+            }
+            if(this.IR.getLS(i).getLabel() != "" || this.IR.getLS(i).getLabel() != null){
+                this.Table.addlabel(this.IR.getLS(i).getLabel(), addr);
+            }
+        }
+    }
     public String RelativeString(int lineNum, int addr, LineStatement lS){
         int opcode = -1;
 
-        if(lS.getInstruction().getMnemonic() != null)
+        if(lS.getInstruction().getMnemonic() != null && lS.getInstruction().getMnemonic() != ".cstring")
             opcode = Table.getOpcode(lS.getInstruction().getMnemonic());
-
         String MachineCode = "";
+        if(opcode != -1)
+            MachineCode = Integer.toHexString(opcode).toUpperCase();
         int offset = -1;
-        if(lS.getInstruction().getMnemonic().equals("br.i8")){
+        if(lS.getInstruction().getMnemonic().equals("br.i8")){//branching
             offset = new Helper().offset255(addr, Table.getOpcode(lS.getInstruction().getOperand()));
-            MachineCode = (Integer.toHexString(opcode) + " " + String.format("%1$2s" ,Integer.toHexString(offset)).replace(' ', '0')).toUpperCase();
+            MachineCode += (" " + String.format("%1$2s" ,Integer.toHexString(offset)).replace(' ', '0')).toUpperCase();
+
+        }else if(lS.getInstruction().getMnemonic().equals("ldv.u8") || lS.getInstruction().getMnemonic().equals("stv.u8")){
+            MachineCode += ( " " + String.format("%1$2s" ,lS.getInstruction().getOperand()).replace(' ', '0')).toUpperCase();
+
+        }else if(lS.getInstruction().getMnemonic().equals(".cstring")){
+            String s = lS.getInstruction().getOperand();
+            for(int i = 0; i < s.length(); i++){
+                MachineCode += (String.format("%1$2s" ,Integer.toHexString(s.charAt(i))).replace(' ', '0') +" ").toUpperCase();
+            }
+            MachineCode += "00";
+
         }
-
-
-
+        String operand = lS.getInstruction().getOperand();
+        if(lS.getInstruction().getMnemonic().equals(".cstring")){
+            operand = "\"" + operand + "\"";
+        }
+        String label = "";
+        if(lS.getLabel() != null){
+            label = lS.getLabel();
+        }
         return String.format("%1$4s", lineNum).replace(' ', '0') +" " +String.format("%1$4s", addr).replace(' ', '0')
-                + " " + String.format("%1$-12s", MachineCode) + "  " + String.format("%1$-14s", lS.getLabel()) +
-                String.format("%1$-10s", lS.getInstruction().getMnemonic()) + String.format("%1$4s", lS.getInstruction().getOperand()) +
+                + " " + String.format("%1$-12s", MachineCode) + "  " + String.format("%1$-14s", label) +
+                String.format("%1$-10s", lS.getInstruction().getMnemonic()) + String.format("%1$4s", operand) +
                 String.format("%1$15s" , lS.getComments());
     }
 
@@ -134,8 +163,6 @@ public class CodeGenerator implements ICodeGenerator{
 
         return code;
     }
-
-
 }
 
 // code = resolvedCode(number, code)[0];

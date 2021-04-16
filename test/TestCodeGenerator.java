@@ -12,13 +12,14 @@ public class TestCodeGenerator {
         //System.out.println("Test generateLst");
         InterRep IR = new InterRep();
         IR.add(new LineStatement("End", "br.i8", "End", ";testing"));
+        IR.add(new LineStatement(null, ".cstring", "A1", ";testing"));
         SymbolTable sT = new SymbolTable();
         sT.addlabel("End", 6);
         sT.addMnemonic("br.i8");
 
         CodeGenerator cG = new CodeGenerator(IR, sT, null);
-
         System.out.println(cG.RelativeString(4, 6, IR.getLS(0)));
+        System.out.println(cG.RelativeString(4, 6, IR.getLS(1)));
 
 
 
