@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.IOException;
 
 public class Assembler {
     public static void main(String[] args) {
@@ -22,12 +21,16 @@ public class Assembler {
                 ErrorReporter reporter = new ErrorReporter();
                 InterRep IR = new Parser(new Scanner(args[args.length - 1], reporter, symbolTable)).generates();
                 //System.out.println(IR);
-                CodeGenerator cG  = new CodeGenerator(IR, symbolTable, new File(args[args.length - 1]));
+                if(options.getVerbose()){
+                    System.out.println("Program running in verbose mode...");
+                }
+                CodeGenerator cG  = new CodeGenerator(IR, symbolTable, new File(args[args.length - 1]), options.getVerbose());
                 if(options.getListing())
                     cG.generateListing();
                 cG.generateExecutable();
                 reporter.report();
             }
+
         }catch(Exception e){
             e.printStackTrace();
             //System.out.println(e.getMessage());

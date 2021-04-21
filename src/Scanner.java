@@ -38,7 +38,7 @@ public class Scanner{
                     label += (char) ch;
                     ch = reader.readChar();
                 }
-                symbolTable.addlabel(label, 0);
+                symbolTable.addlabel(label, -1);
             }
             else{
                 while (ch != 10) { ch = reader.readChar();

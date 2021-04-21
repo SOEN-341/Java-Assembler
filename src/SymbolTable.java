@@ -134,6 +134,9 @@ public class SymbolTable implements ISymbolTable{
                 "Table=" + Table +
                 '}';
     }
+    public boolean contains(String key){
+        return this.Table.contains(key);
+    }
 }
 
 

@@ -1,16 +1,19 @@
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.File;
+import java.util.ArrayList;
 
 // receive
 public class CodeGenerator implements ICodeGenerator{
     private InterRep IR;
     private SymbolTable Table;
     private File f;
-    public CodeGenerator(InterRep IR, SymbolTable Table, File f){
+    private boolean isVerbose;
+    public CodeGenerator(InterRep IR, SymbolTable Table, File f, boolean isVerbose){
         this.IR = IR;
         this.Table = Table;
         this.f = f;
+        this.isVerbose = isVerbose;
     }
 
     public void generateListing(){
@@ -28,12 +31,13 @@ public class CodeGenerator implements ICodeGenerator{
             this.firstPass();
             //System.out.println(this.Table);
             for(int i = 0, addr=0; i < this.IR.getSize(); i++,addr+=2){
-                currentLine = RelativeString(i,addr, this.IR.getLS(i));
+                currentLine = RelativeString(i,addr, this.IR.getLS(i), false);
 
                 String mnemonic = this.IR.getLS(i).getInstruction().getMnemonic();
                 if(mnemonic == ""){
                     addr-=2;
                 }
+
                 for(int j = 0;j < currentLine.length(); j++){
                     foS.write(currentLine.charAt(j));
                 }
@@ -55,16 +59,26 @@ public class CodeGenerator implements ICodeGenerator{
     public void generateExecutable(){
         FileOutputStream foS = null;
         try{
-            foS = new FileOutputStream(new File(this.f.getName().replace(".asm", ".txt").replace("copied", "")));
+            foS = new FileOutputStream(new File(this.f.getName().replace(".asm", ".exe").replace("copied", "")));
             this.firstPass();
             //System.out.println(this.Table);
+            if(isVerbose)
+                System.out.println("***  Listing after second pass ***");
             for(int i = 0, addr=0; i < this.IR.getSize(); i++,addr+=2){
+
+                if(isVerbose){
+                    String currentLine = RelativeString(i,addr, this.IR.getLS(i), false);
+                    System.out.println(currentLine);
+                }
+
                 String mnemonic = this.IR.getLS(i).getInstruction().getMnemonic();
                 if(mnemonic == ""){
                     addr-=2;
                 }
 
-                String code = generateRelativeCode(addr ,this.IR.getLS(i)).toUpperCase() + " ";
+
+
+                String code = generateRelativeCode(addr ,this.IR.getLS(i), true).toUpperCase() + " ";
                 code = code.replace("\n", "");
 
                 for(int j = 0;j < code.length(); j++){
@@ -107,21 +121,50 @@ public class CodeGenerator implements ICodeGenerator{
     }
 
     public void firstPass(){
+        ArrayList<String> labelsFound = new ArrayList<>();
+        ArrayList<String> firstPassOutPut = new ArrayList<>();
+
         for(int i = 0, addr=0; i < this.IR.getSize(); i++,addr+=2){
+
+
+            //System.out.println(mnemonic + "X" + this.IR.getLS(i).getLabel());
+            if((this.IR.getLS(i).getLabel() != "" || this.IR.getLS(i).getLabel() != null) && !this.Table.contains(this.IR.getLS(i).getLabel())){
+                //System.out.println(this.IR.getLS(i).getLabel() + " " + Integer.toHexString(addr-2));
+                this.Table.addlabel(this.IR.getLS(i).getLabel(), addr);
+                if (isVerbose){
+                    if(this.IR.getLS(i).getLabel() != "")
+                        labelsFound.add("label: "+ this.IR.getLS(i).getLabel() + " found at address " + Integer.toHexString(addr));
+                }
+            }
+
+
+            if(addr < 0)
+                addr = 0;
+            firstPassOutPut.add(RelativeString(i,addr, this.IR.getLS(i), true));
             String mnemonic = this.IR.getLS(i).getInstruction().getMnemonic();
             if(mnemonic == ""){
                 addr-=2;
             }
-            //System.out.println(mnemonic + "X" + this.IR.getLS(i).getLabel());
-            if(this.IR.getLS(i).getLabel() != "" || this.IR.getLS(i).getLabel() != null){
-                this.Table.addlabel(this.IR.getLS(i).getLabel(), addr);
+        }
+
+        if(this.isVerbose)
+        {
+            System.out.println("***  Labels found in first pass  ***");
+            for (String word : labelsFound) {
+                System.out.println(word);
+            }
+            System.out.println("***  Listing after first pass  ***");
+            for (String word : firstPassOutPut) {
+                System.out.println(word);
             }
         }
+
+
     }
-    public String RelativeString(int lineNum, int addr, LineStatement lS){
+    public String RelativeString(int lineNum, int addr, LineStatement lS, boolean forVerbose){
         String MachineCode = "";
         if(lS.getInstruction().getMnemonic() != "")
-            MachineCode = generateRelativeCode(addr,lS);
+            MachineCode = generateRelativeCode(addr,lS, false);
 
         String operand = lS.getInstruction().getOperand();
         if(lS.getInstruction().getMnemonic().equals(".cstring")){
@@ -135,6 +178,13 @@ public class CodeGenerator implements ICodeGenerator{
         if(lS.getComments() != null && lS.getComments() != ""){
             comment = ";"+lS.getComments();
         }
+        if(forVerbose){
+            if(MachineCode.contains(" ??") && lS.getInstruction().getMnemonic().equals("br.i8"))
+                comment += " <--- offset unresolved in first path due to forward branching";
+            else if(!MachineCode.contains(" ??") && !lS.getLabel().equals(operand) && lS.getInstruction().getMnemonic().equals("br.i8"))
+                comment += " <--- offset resolved in first path due to backward branching";
+        }
+
         return String.format("%1$4s", lineNum).replace(' ', '0') +" " +String.format("%1$4s", addr).replace(' ', '0')
                 + " " + String.format("%1$-12s", MachineCode) + "  " + String.format("%1$-14s", label) +
                 String.format("%1$-9s", lS.getInstruction().getMnemonic()) + String.format("%1$5s", operand) +
@@ -159,7 +209,7 @@ public class CodeGenerator implements ICodeGenerator{
 
         return code;
     }
-    public String generateRelativeCode(int addr, LineStatement lS){
+    public String generateRelativeCode(int addr, LineStatement lS, boolean test){
         int opcode = -1;
 
         if(lS.getInstruction().getMnemonic() != null && lS.getInstruction().getMnemonic() != ".cstring")
@@ -169,8 +219,18 @@ public class CodeGenerator implements ICodeGenerator{
             MachineCode = Integer.toHexString(opcode).toUpperCase();
         int offset = -1;
         if(lS.getInstruction().getMnemonic().equals("br.i8")){//branching
+
+            if(false){
+                System.out.print(lS.getInstruction().getOperand() + " " + Integer.toHexString(addr) + " " + Integer.toHexString(Table.getOpcode(lS.getInstruction().getOperand())));
+                System.out.println(" offset: " + new Helper().offset255(addr, Table.getOpcode(lS.getInstruction().getOperand())));
+            }
             offset = new Helper().offset255(addr, Table.getOpcode(lS.getInstruction().getOperand()));
-            MachineCode += (" " + String.format("%1$2s" ,Integer.toHexString(offset)).replace(' ', '0')).toUpperCase();
+
+            if(Table.getOpcode(lS.getInstruction().getOperand()) == -1)
+                MachineCode += " ??";
+            else
+                MachineCode += (" " + String.format("%1$2s" ,Integer.toHexString(offset)).replace(' ', '0')).toUpperCase();
+
 
         }else if(lS.getInstruction().getMnemonic().equals("ldv.u8") || lS.getInstruction().getMnemonic().equals("stv.u8") || lS.getInstruction().getMnemonic().equals("ldc.i8")){
             MachineCode += ( " " + String.format("%1$2s" ,Integer.toHexString(Integer.parseInt(lS.getInstruction().getOperand()))).replace(' ', '0')).toUpperCase();
